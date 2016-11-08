@@ -6,7 +6,7 @@
 class Router {
 	constructor(window, pageMap) {
 		this.window = window;
-		this.pageMap = pageMap
+		this.pageMap = pageMap;
 
 		this.allController = new AllController(window);
 		this.activeController = new ActiveController(window);
