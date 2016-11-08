@@ -60,6 +60,10 @@
 				<button class="clear-completed">Clear completed</button>
 			</footer>
 		</section>
+		<div>
+			<button class="temp-button" onclick="testSet()">Set item</button>
+			<button class="temp-button" onclick="testGet()">Get item</button>
+		</div>
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
 			<!-- Remove the below line ↓ -->
@@ -71,5 +75,17 @@
 		<!-- Scripts here. Don't remove ↓ -->
 		<script src="node_modules/todomvc-common/base.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/api.js"></script>
+		<script>
+
+			function testSet() {
+				APILocalStorage.setItem("test_item", "test_test_test");
+			}
+
+			function testGet() {
+				console.log(APILocalStorage.getItem("test_item"));
+			}
+
+		</script>
 	</body>
 </html>
