@@ -72,6 +72,10 @@ class EventEmitter {
 		}
 	}
 
+	onKeyPress(context, selector, handle) {
+		document.querySelectorAll(selector)[0].onkeypress = handle.bind(context);
+	}
+
 }
 
 module.exports = EventEmitter;

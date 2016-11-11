@@ -18,12 +18,18 @@ class Views extends Events {
 	}
 
 	setElement(selector) {
-		this.el = document.querySelectorAll(selector);
+		// this.el = document.querySelectorAll(selector);
+		this.el = selector;
 	}
 
 	setModel(model) {
 		this.model = model;
 		this.listenTo(this.model, 'change', this.render, this);
+	}
+
+	setTemplate(path) {
+		this.template =  _.template(document.querySelectorAll(path)[0].innerText);
+
 	}
 
 }
