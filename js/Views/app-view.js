@@ -19,20 +19,33 @@ class AppView extends Artemone.Views {
 	initialize() {
 		this.setModel(new Todos());
 		this.list = document.getElementsByClassName('todo-list');
-		this.listenTo(this.model, 'add', this.addOne);
+		this.footer = document.getElementsByClassName('footer');
+		//this.listenTo(this.model, 'add', this.addOne, this);
+		this.listenTo(this.model, 'add', this.render, this);
 
 		this.onKeyPress(this, '.new-todo', this.createOnEnter);
+
+		this.setTemplate('#stats-template');
 	}
 
 	render() {
 
+		var completed = this.model.models.length;
+		var remaining = this.model.models.length;
+
+		this.footer[0].innerHTML = this.template({
+			completed: completed,
+			remaining: remaining
+		});
+
+		return this;
 	}
 
 	addOne(model) {
 		var todoView = new TodoView();
-		todoView.setElement('li');
 		todoView.setModel(model);
-		this.list[0].innerHTML += todoView.render().el
+		this.model.add(model);
+		this.list[0].appendChild(todoView.render().el);
 	}
 
 	addAll(models) {

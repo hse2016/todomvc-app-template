@@ -5,6 +5,7 @@
 
 var _ = require('underscore');
 var Events = require('./Events');
+var modelCount = 0;
 
 
 class Models extends Events {
@@ -12,6 +13,8 @@ class Models extends Events {
 		super();
 		this.attributes = {};
 		this.set(attributes);
+
+		this.id = modelCount++;
 	}
 
 	set(attributes) {

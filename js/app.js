@@ -9,7 +9,7 @@
 
 
 
-	var todo1 = new Todo({'title' : 'Artem'});
+	var todo1 = new Todo({'title' : 'Artem', 'completed' : true});
 	var todo2 = new Todo({'title' : 'Temka'});
 	var todo3 = new Todo({'title' : 'Temo4ka'});
 	var appView = new AppView();

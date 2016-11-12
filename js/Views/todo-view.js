@@ -8,14 +8,21 @@ var _ = require('underscore');
 class TodoView extends Artemone.Views {
 
 	constructor() {
-		super();
+		super('li');
 		this.setTemplate('#template-todo');
 	}
 
+	events() {
+		console.log(this.el.getElementsByClassName('toggle'));
+	}
+
 	render() {
-		this.el = this.template(this.model.attributes);
-		console.log(this.model.attributes);
+		this.el.innerHTML = this.template(this.model.attributes);
 		return this;
+	}
+
+	toggleCompleted() {
+		this.model.toggle();
 	}
 }
 

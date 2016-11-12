@@ -71,14 +71,30 @@
 
 
 <script id="template-todo" type="text/x-template">
-	<li>
-		<div class='view'>
-			<input class='toggle' type='checkbox'>
-			<label><%=title%></label>
-			<button class='destroy'></button>
+		<div class="view">
+			<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+			<label><%- title %></label>
+			<button class="destroy"></button>
 		</div>
-		<input class='edit' value='Rule the web'>
-	</li>
+		<input class="edit" value="<%- title %>">
+</script>
+
+<script type="text/template" id="stats-template">
+	<span class="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
+	<ul class="filters">
+		<li>
+			<a class="selected" href="#/">All</a>
+		</li>
+		<li>
+			<a href="#/active">Active</a>
+		</li>
+		<li>
+			<a href="#/completed">Completed</a>
+		</li>
+	</ul>
+	<% if (completed) { %>
+	<button class="clear-completed">Clear completed</button>
+	<% } %>
 </script>
 
 <!-- Scripts here. Don't remove ↓ -->

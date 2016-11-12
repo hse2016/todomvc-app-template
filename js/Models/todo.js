@@ -18,6 +18,12 @@ class Todo extends Artemone.Models {
 		}
 	}
 
+	toggle() {
+		this.set({
+			completed: !this.get('completed')
+		});
+	}
+
 }
 
 module.exports = Todo;

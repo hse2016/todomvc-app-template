@@ -8,18 +8,24 @@ var Events = require('./Events');
 
 class Views extends Events {
 
-	constructor(selector) {
+	constructor(tag) {
 		super();
-		this.setElement(selector);
+		this.setTag(tag);
+		this.wrapTag();
+		this.events();
 	}
 
 	render() {
 		return this;
 	}
 
+	events() {
+		return this;
+	}
+
 	setElement(selector) {
-		// this.el = document.querySelectorAll(selector);
-		this.el = selector;
+		this.el = document.querySelectorAll(selector);
+		return this;
 	}
 
 	setModel(model) {
@@ -30,6 +36,18 @@ class Views extends Events {
 	setTemplate(path) {
 		this.template =  _.template(document.querySelectorAll(path)[0].innerText);
 
+	}
+
+	setTag(tag) {
+		this.tag = tag;
+	}
+
+	wrapTag() {
+		if(this.tag !== undefined) {
+			this.el = document.createElement(this.tag);
+			console.log(this.el);
+			// this.el = "<" + this.tag + " id='" + this.model.id + "'>" + this.el + "</" + this.tag + ">";
+		}
 	}
 
 }
