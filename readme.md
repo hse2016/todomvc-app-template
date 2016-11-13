@@ -31,14 +31,14 @@ My framework is Artemone (like other popular framework).
 
 Artemone - main class of framework
 
-Model - models to collect data
-Collection - collection of models
-View - representation of data
-Router - routing in app
-Events - event emitrer
-LocalStorage - adapter for native localStorage
+Model - models to collect data <br />
+Collection - collection of models <br />
+View - representation of data <br />
+Router - routing in app <br />
+Events - event emitrer <br />
+LocalStorage - adapter for native localStorage <br />
 
-Остальная информация будет позже...
+Остальная информация будет позже... <br />
 Нет времени сейчас дописывать.
 
 ## Credit
