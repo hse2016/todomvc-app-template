@@ -6,8 +6,9 @@ class TodoView extends BaseView {
   constructor() {
     super();
     this.todo_list = document.querySelector('.todo-list');
-    this.new_todo = document.querySelector('.new-todo');
+
     this.addOnAddNewTodoListener();
+    this.addOnClearCompletedListener();
   }
 
   renderTodoList(todos) {
@@ -68,14 +69,22 @@ class TodoView extends BaseView {
   }
 
   addOnAddNewTodoListener() {
-    this.new_todo.onkeyup = event => {
+    const new_todo = document.querySelector('.new-todo');
+    new_todo.onkeyup = event => {
       if (event.keyCode === 13) {
-        const title = this.new_todo.value.trim();
+        const title = new_todo.value.trim();
         if (title !== '') {
           this.emit('add_new_todo', title);
-          this.new_todo.value = '';
+          new_todo.value = '';
         }
       }
+    };
+  }
+
+  addOnClearCompletedListener() {
+    const clear_completed = document.querySelector('.clear-completed');
+    clear_completed.onclick = () => {
+      this.emit('clear_completed');
     };
   }
 
