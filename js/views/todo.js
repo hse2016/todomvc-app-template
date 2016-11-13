@@ -10,10 +10,11 @@ class TodoView extends BaseView {
     this.addOnAddNewTodoListener();
   }
 
-  renderTodos(todos) {
+  renderTodoList(todos) {
     let html = '';
     for (let id in todos) {
-      html += this.todoTemplate(id, todos[id]);
+      const todo = todos[id];
+      html += this.todoTemplate(id, todo);
     }
     this.todo_list.innerHTML = html;
     this.addAllListeners(todos);
@@ -21,43 +22,76 @@ class TodoView extends BaseView {
 
   todoTemplate(id, todo) {
     return (
-      `<li id="todo_${id}" ${todo.is_done ? 'class="completed"' : ''}>
+      `<li id="todo_${id}" class="${todo.is_completed ? 'completed' : ''} ${todo.is_editing ? 'editing' : ''}">
         <div class="view">
-          <input class="toggle" type="checkbox" ${todo.is_done ? 'checked' : ''}>
+          <input class="toggle" type="checkbox" ${todo.is_completed ? 'checked' : ''}>
           <label>${todo.title}</label>
           <button class="destroy"></button>
         </div>
-        <input class="edit" value="Rule the web">
+        <input class="edit" value="${todo.title}">
       </li>`
     );
   }
 
+  editTodo(id) {
+    const todo_li = this.todo_list.querySelector(`li#todo_${id}`);
+    todo_li.className += ' editing';
+    const todo_input = todo_li.querySelector('input.edit');
+    todo_input.focus();
+    todo_input.selectionStart = todo_input.value.length;
+
+    const source_title = todo_input.value;
+
+    todo_input.onblur = () => {
+      todo_input.value = source_title;
+      const pos = todo_li.className.search(' editing');
+      if (pos !== -1) {
+        todo_li.className = todo_li.className.substr(0, pos) + todo_li.className.substr(pos + 8);
+      }
+    };
+
+    todo_input.onkeyup = event => {
+      if (event.keyCode === 13) {
+        this.emit('edit_todo', id, todo_input.value);
+      } else if (event.keyCode === 27) {
+        todo_input.blur();
+      }
+    };
+  }
 
   addAllListeners(todos) {
     for (let id in todos) {
       this.addOnChangeListener(id);
       this.addOnDeleteListener(id);
+      this.addOnEditListener(id);
     }
   }
 
   addOnAddNewTodoListener() {
     this.new_todo.onkeyup = event => {
       if (event.keyCode === 13) {
-        const title = this.new_todo.value;
-        this.emit('add_new_todo', title);
-        this.new_todo.value = '';
+        const title = this.new_todo.value.trim();
+        if (title !== '') {
+          this.emit('add_new_todo', title);
+          this.new_todo.value = '';
+        }
       }
     };
   }
 
   addOnChangeListener(id) {
-    document.querySelector(`#todo_${id}>.view>.toggle`)
+    this.todo_list.querySelector(`li#todo_${id} div.view input.toggle`)
       .onchange = () => this.emit('change_state', id);
   }
 
   addOnDeleteListener(id) {
-    document.querySelector(`#todo_${id}>.view>.destroy`)
+    this.todo_list.querySelector(`li#todo_${id} div.view button.destroy`)
       .onclick = () => this.emit('delete_todo', id);
+  }
+
+  addOnEditListener(id) {
+    this.todo_list.querySelector(`li#todo_${id} div.view label`)
+      .ondblclick = () => this.editTodo(id);
   }
 }
 
