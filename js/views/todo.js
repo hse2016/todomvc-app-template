@@ -6,25 +6,18 @@ class TodoView extends BaseView {
   constructor() {
     super();
     this.todo_list = document.querySelector('.todo-list');
+    this.new_todo = document.querySelector('.new-todo');
+    this.addOnAddNewTodoListener();
   }
 
-  addData(data) {
-    data.forEach((todo, id) => {
-      this.todo_list.innerHTML += this.todoTemplate(id, todo);
-    });
-
-    data.forEach((todo, id) => this.addAllListener(id));
+  renderTodos(todos) {
+    let html = '';
+    for (let id in todos) {
+      html += this.todoTemplate(id, todos[id]);
+    }
+    this.todo_list.innerHTML = html;
+    this.addAllListeners(todos);
   }
-
-  changeTodo(id, todo) {
-    document.querySelector(`#todo_${id}`).outerHTML = this.todoTemplate(id, todo);
-    this.addAllListener(id);
-  }
-
-  deleteTodo(id) {
-    document.querySelector(`#todo_${id}`).outerHTML = "";
-  }
-
 
   todoTemplate(id, todo) {
     return (
@@ -39,9 +32,22 @@ class TodoView extends BaseView {
     );
   }
 
-  addAllListener(id) {
-    this.addOnChangeListener(id);
-    this.addOnDeleteListener(id);
+
+  addAllListeners(todos) {
+    for (let id in todos) {
+      this.addOnChangeListener(id);
+      this.addOnDeleteListener(id);
+    }
+  }
+
+  addOnAddNewTodoListener() {
+    this.new_todo.onkeyup = event => {
+      if (event.keyCode === 13) {
+        const title = this.new_todo.value;
+        this.emit('add_new_todo', title);
+        this.new_todo.value = '';
+      }
+    };
   }
 
   addOnChangeListener(id) {

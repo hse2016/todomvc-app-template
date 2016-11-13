@@ -12,29 +12,39 @@ class Todo {
 class TodosModel extends BaseModel {
   constructor(todo_view) {
     super();
-    this.data = [
-      new Todo('First'),
-      new Todo('Second', true),
-      new Todo('Third', true),
-      new Todo('Fourth'),
+    this.data = {
+      1: new Todo('First'),
+      2: new Todo('Second', true),
+      3: new Todo('Third', true),
+      4: new Todo('Fourth')
+    };
+    this.last_id = 4;
 
-    ];
-    todo_view.addData(this.data);
     this.listenTo(todo_view, 'change_state', (id) => this.changeState(id));
     this.listenTo(todo_view, 'delete_todo', (id) => this.deleteTodo(id));
+    this.listenTo(todo_view, 'add_new_todo', (title) => this.addNewTodo(title));
     this.todo_view = todo_view;
+    this.todo_view.renderTodos(this.data);
   }
 
   changeState(id) {
     const todo = this.data[id];
     todo.is_done = !todo.is_done;
-    this.todo_view.changeTodo(id, todo);
-    console.log('TodosModel.changeState', id);
+    this.todo_view.renderTodos(this.data);
   }
 
   deleteTodo(id) {
     delete this.data[id];
-    this.todo_view.deleteTodo(id);
+    this.todo_view.renderTodos(this.data);
+  }
+
+  addNewTodo(title) {
+    const id = ++this.last_id;
+    const todo = new Todo(title);
+    this.data = Object.assign(this.data, {
+      [id]: todo
+    });
+    this.todo_view.renderTodos(this.data);
   }
 }
 
