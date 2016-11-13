@@ -26,6 +26,7 @@ class TodosModel extends BaseModel {
     this.listenTo(todo_view, 'add_new_todo', (title) => this.addNewTodo(title));
     this.listenTo(todo_view, 'edit_todo', (id, title) => this.editTodo(id, title));
     this.listenTo(todo_view, 'clear_completed', () => this.clearCompleted());
+    this.listenTo(todo_view, 'toggle_all', (state) => this.toggleAll(state));
     this.todo_view = todo_view;
     this.renderTodoList();
   }
@@ -60,6 +61,13 @@ class TodosModel extends BaseModel {
       if (this.data[id].is_completed) {
         delete this.data[id];
       }
+    }
+    this.renderTodoList();
+  }
+
+  toggleAll(state) {
+    for (let id in this.data) {
+      this.data[id].is_completed = state;
     }
     this.renderTodoList();
   }

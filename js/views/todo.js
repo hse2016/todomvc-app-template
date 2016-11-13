@@ -9,6 +9,7 @@ class TodoView extends BaseView {
 
     this.addOnAddNewTodoListener();
     this.addOnClearCompletedListener();
+    this.addOnToggleAllListener();
   }
 
   renderTodoList(todos) {
@@ -82,11 +83,19 @@ class TodoView extends BaseView {
   }
 
   addOnClearCompletedListener() {
-    const clear_completed = document.querySelector('.clear-completed');
+    const clear_completed = document.querySelector('button.clear-completed');
     clear_completed.onclick = () => {
       this.emit('clear_completed');
     };
   }
+
+  addOnToggleAllListener() {
+    const toggle_all = document.querySelector('input.toggle-all');
+    toggle_all.onclick = () => {
+      this.emit('toggle_all', toggle_all.checked);
+    };
+  }
+
 
   addOnChangeListener(id) {
     this.todo_list.querySelector(`li#todo_${id} div.view input.toggle`)
