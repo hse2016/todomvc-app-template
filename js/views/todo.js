@@ -13,13 +13,20 @@ class TodoView extends BaseView {
   }
 
   renderTodoList(todos) {
+    let todo_count = 0;
     let html = '';
     for (let id in todos) {
       const todo = todos[id];
       html += this.todoTemplate(id, todo);
+      todo_count += !todo.is_completed;
     }
+    this.changeItemsLeftCounter(todo_count);
     this.todo_list.innerHTML = html;
     this.addAllListeners(todos);
+  }
+
+  changeItemsLeftCounter(count) {
+    document.querySelector('span.todo-count').innerHTML = `<strong>${count}</strong> item${count === 1? '' : 's'} left`;
   }
 
   todoTemplate(id, todo) {
@@ -54,7 +61,7 @@ class TodoView extends BaseView {
 
     todo_input.onkeyup = event => {
       if (event.keyCode === 13) {
-        this.emit('edit_todo', id, todo_input.value);
+        this.emit('edit_todo', id, todo_input.value.trim());
       } else if (event.keyCode === 27) {
         todo_input.blur();
       }

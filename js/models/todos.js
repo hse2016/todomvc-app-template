@@ -52,8 +52,12 @@ class TodosModel extends BaseModel {
   }
 
   editTodo(id, title) {
-    this.data[id].title = title;
-    this.renderTodoList();
+    if (title === '') {
+      this.deleteTodo(id);
+    } else {
+      this.data[id].title = title;
+      this.renderTodoList();
+    }
   }
 
   clearCompleted() {
