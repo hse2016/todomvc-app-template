@@ -12,7 +12,10 @@ class Views extends Events {
 		super();
 		this.setTag(tag);
 		this.wrapTag();
-		this.events();
+	}
+
+	initialize() {
+
 	}
 
 	render() {
@@ -23,14 +26,21 @@ class Views extends Events {
 		return this;
 	}
 
+	remove() {
+		this.el.outerHTML = '';
+	}
+
 	setElement(selector) {
-		this.el = document.querySelectorAll(selector);
+		this.el = document.querySelector(selector);
 		return this;
 	}
+
 
 	setModel(model) {
 		this.model = model;
 		this.listenTo(this.model, 'change', this.render, this);
+		this.listenTo(this.model, 'destroy', this.remove, this);
+		this.initialize();
 	}
 
 	setTemplate(path) {
@@ -45,7 +55,6 @@ class Views extends Events {
 	wrapTag() {
 		if(this.tag !== undefined) {
 			this.el = document.createElement(this.tag);
-			console.log(this.el);
 			// this.el = "<" + this.tag + " id='" + this.model.id + "'>" + this.el + "</" + this.tag + ">";
 		}
 	}

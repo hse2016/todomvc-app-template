@@ -76,6 +76,24 @@ class EventEmitter {
 		document.querySelectorAll(selector)[0].onkeypress = handle.bind(context);
 	}
 
+	onClick(context, element, selector, handle) {
+
+		if(element === undefined)
+			return;
+
+		if(selector !== '' && selector != undefined) {
+			var el_selector = element.querySelector(selector);
+			if(el_selector !== null) {
+				// el_selector = el_selector[0];
+			}
+		}
+
+		if(el_selector)
+			el_selector.addEventListener("click", handle.bind(context));
+		else
+			element.addEventListener("click", handle.bind(context));
+
+	}
 }
 
 module.exports = EventEmitter;

@@ -3,7 +3,6 @@
  */
 'use strict';
 
-var _ = require('underscore');
 var Events = require('./Events');
 var modelCount = 0;
 
@@ -26,6 +25,14 @@ class Models extends Events {
 
 	get(key) {
 		return this.attributes[key];
+	}
+
+	destroy() {
+		this.emit('destroy', this);
+	}
+
+	toString() {
+		return JSON.stringify(this.attributes);
 	}
 }
 

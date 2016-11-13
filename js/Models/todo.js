@@ -22,6 +22,7 @@ class Todo extends Artemone.Models {
 		this.set({
 			completed: !this.get('completed')
 		});
+		return this.get('completed');
 	}
 
 }
