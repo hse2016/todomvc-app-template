@@ -1,25 +1,46 @@
-# TodoMVC App Template
+# Framework Name • [TodoMVC](http://todomvc.com)
 
-> Template used for creating [TodoMVC](http://todomvc.com) apps
-
-![](https://github.com/tastejs/todomvc-app-css/raw/master/screenshot.png)
+> Official description of the framework (from its website)
 
 
+## Resources
 
-## Getting started
+- [Website]()
+- [Documentation]()
+- [Used by]()
+- [Blog]()
+- [FAQ]()
 
-- Read the [Application Specification](https://github.com/tastejs/todomvc/blob/master/app-spec.md) before touching the template.
+### Articles
 
-- Delete this file and rename `app-readme.md` to `readme.md` and fill it out.
+- [Interesting article]()
 
-- Clone this repo and install the dependencies with [npm](https://npmjs.com) by running: `npm install`.
+### Support
+
+- [Stack Overflow](http://stackoverflow.com/questions/tagged/__)
+- [Google Groups]()
+- [Twitter](http://twitter.com/__)
+- [Google+]()
+
+*Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
 
 
-## License
+## Implementation
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sindresorhus.com" property="cc:attributionName" rel="cc:attributionURL">TasteJS</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.
+My framework is Artemone (like other popular framework).
 
-## Usage (build js)
+Artemone - main class of framework
 
-`npm run build-js` (just build js file)
-`npm run watch-js` (start watching your js file)
+Model - models to collect data
+Collection - collection of models
+View - representation of data
+Router - routing in app
+Events - event emitrer
+LocalStorage - adapter for native localStorage
+
+Остальная информация будет позже...
+Нет времени сейчас дописывать.
+
+## Credit
+
+Created by [Your Name](http://your-website.com)
