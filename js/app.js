@@ -1,7 +1,5 @@
-(function(window) {
-  'use strict';
+'use strict';
 
-  // Your starting point. Enjoy the ride!
-  // Write npm run watch-js to start coding
+const TodoController = require('./controllers/todo');
 
-})(window);
+const todo_controller = new TodoController();
