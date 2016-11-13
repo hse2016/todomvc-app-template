@@ -13,14 +13,18 @@ class TodoView extends BaseView {
       this.todo_list.innerHTML += this.todoTemplate(id, todo);
     });
 
-    data.forEach((todo, id) => this.addOnChangeListener(id));
+    data.forEach((todo, id) => this.addAllListener(id));
   }
 
   changeTodo(id, todo) {
-    console.log("TodoView.changeTodo", todo);
     document.querySelector(`#todo_${id}`).outerHTML = this.todoTemplate(id, todo);
-    this.addOnChangeListener(id);
+    this.addAllListener(id);
   }
+
+  deleteTodo(id) {
+    document.querySelector(`#todo_${id}`).outerHTML = "";
+  }
+
 
   todoTemplate(id, todo) {
     return (
@@ -35,9 +39,19 @@ class TodoView extends BaseView {
     );
   }
 
+  addAllListener(id) {
+    this.addOnChangeListener(id);
+    this.addOnDeleteListener(id);
+  }
+
   addOnChangeListener(id) {
     document.querySelector(`#todo_${id}>.view>.toggle`)
       .onchange = () => this.emit('change_state', id);
+  }
+
+  addOnDeleteListener(id) {
+    document.querySelector(`#todo_${id}>.view>.destroy`)
+      .onclick = () => this.emit('delete_todo', id);
   }
 }
 

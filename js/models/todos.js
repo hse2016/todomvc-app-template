@@ -20,7 +20,8 @@ class TodosModel extends BaseModel {
 
     ];
     todo_view.addData(this.data);
-    this.listenTo(todo_view, 'change_state', (...args) => this.changeState(...args));
+    this.listenTo(todo_view, 'change_state', (id) => this.changeState(id));
+    this.listenTo(todo_view, 'delete_todo', (id) => this.deleteTodo(id));
     this.todo_view = todo_view;
   }
 
@@ -29,6 +30,11 @@ class TodosModel extends BaseModel {
     todo.is_done = !todo.is_done;
     this.todo_view.changeTodo(id, todo);
     console.log('TodosModel.changeState', id);
+  }
+
+  deleteTodo(id) {
+    delete this.data[id];
+    this.todo_view.deleteTodo(id);
   }
 }
 
