@@ -12,9 +12,7 @@
 	});
 
 	document.getElementById('temp-button-get').addEventListener('click', function () {
-		lsapi.getItem('test-item').then( function (data) {
-			console.log(data);
-		});
+		console.log(lsapi.getItem('test-item'));
 	});
 
 })(window);

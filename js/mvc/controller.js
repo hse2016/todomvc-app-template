@@ -1,10 +1,16 @@
 'use strict';
 
+let Listener = require('./event-model').Listener;
+
 /*
 	Класс контроллера. Связывает отображение с моделью.
  */
 
-class Controller {
+class Controller extends Listener {
+	constructor(view, model) {
+		super();
+		this.model = model;
+	}
 
 }
 

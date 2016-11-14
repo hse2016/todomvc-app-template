@@ -1,13 +1,15 @@
 'use strict';
 let API = require('../api');
 let Adapters = require('../adapters');
+let EventEmitter = require('./event-model').EventEmitter;
 
 /*
 	Класс модели. Отвечает за взаимодействие с данными и бизнес-логику.
  */
 
-class Model {
+class Model extends EventEmitter {
 	constructor(options) {
+		super();
 		if (options.init) {
 			if (typeof options.init !== 'function') {
 				throw Error('Wrong format for Model.options.init');
@@ -45,8 +47,6 @@ class Model {
 	setItem(key, data) {
 		this.data['key'] = data;
 	}
-
-
 
 }
 

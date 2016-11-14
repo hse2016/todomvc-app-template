@@ -46,3 +46,5 @@ class Listener {
 		}
 	}
 }
+
+module.exports = {'EventEmitter' : EventEmitter, 'Listener' : Listener};
