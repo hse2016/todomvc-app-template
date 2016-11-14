@@ -20,8 +20,12 @@ class TodoView extends BaseView {
       html += this.todoTemplate(id, todo);
       todo_count += !todo.is_completed;
     }
-    this.changeItemsLeftCounter(todo_count);
     this.todo_list.innerHTML = html;
+
+    this.hideMainAndFooter(Object.keys(todos).length === 0);
+    this.hideClearCompletedButton(todo_count === Object.keys(todos).length);
+    this.checkToggleAllButton(todo_count === 0);
+    this.changeItemsLeftCounter(todo_count);
     this.addAllListeners(todos);
   }
 
@@ -68,6 +72,11 @@ class TodoView extends BaseView {
     };
   }
 
+  hideMainAndFooter(hide) {
+    document.querySelector('section.main').hidden = hide;
+    document.querySelector('footer.footer').hidden = hide;
+  }
+
   addAllListeners(todos) {
     for (let id in todos) {
       this.addOnChangeListener(id);
@@ -89,11 +98,16 @@ class TodoView extends BaseView {
     };
   }
 
+
   addOnClearCompletedListener() {
     const clear_completed = document.querySelector('button.clear-completed');
     clear_completed.onclick = () => {
       this.emit('clear_completed');
     };
+  }
+
+  hideClearCompletedButton(hide) {
+    document.querySelector('button.clear-completed').hidden = hide;
   }
 
   addOnToggleAllListener() {
@@ -103,6 +117,9 @@ class TodoView extends BaseView {
     };
   }
 
+  checkToggleAllButton(check) {
+    document.querySelector('input.toggle-all').checked = check;
+  }
 
   addOnChangeListener(id) {
     this.todo_list.querySelector(`li#todo_${id} div.view input.toggle`)
