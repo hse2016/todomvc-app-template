@@ -4,7 +4,8 @@
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0",
     "watchify": "^3.7.0",
-    "browserify": "^13.1.1"
+    "browserify": "^13.1.1",
+    "handlebars" : "^4.0.6"
   },
 
   "scripts": {

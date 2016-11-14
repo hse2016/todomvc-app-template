@@ -5,28 +5,12 @@ class API {
 	}
 
 	getItem(key) {
-		return adapter.getItem(key);
+		return this.adapter.getItem(key);
 	}
 
 	setItem(key, value) {
-		adapter.setItem(key, value);
+		this.adapter.setItem(key, value);
 	}
 }
 
-class LocalStorageAdapter {
-
-	constructor () {
-
-	}
-
-	static storage = localStorage;
-
-	getItem(key) {
-		LocalStorageAdapter.storage.getItem(key);
-	}
-
-	setItem(key, value) {
-		LocalStorageAdapter.storage.setItem(key, value);
-	}
-
-}
+module.exports = API;
