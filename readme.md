@@ -5,7 +5,10 @@
 
 ## QUICK START
 
-Just open index.html in browser
+1. Clone repository to your computer
+2. run `npm i` in root folder
+3. run `npm run build-js` in root folder
+4. Open index.html in browser
 
 ## Resources
 
