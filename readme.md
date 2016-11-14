@@ -3,6 +3,10 @@
 > Official description of the framework (from its website)
 
 
+## QUICK START
+
+Just open index.html in browser
+
 ## Resources
 
 - [Website]()
