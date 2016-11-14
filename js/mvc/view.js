@@ -5,7 +5,9 @@
  */
 
 class View {
+	constructor(htmlitem, ){
 
+}
 }
 
 module.exports = View;
