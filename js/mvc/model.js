@@ -46,6 +46,10 @@ class Model extends EventEmitter {
 
 	setItem(key, data) {
 		this.data['key'] = data;
+		this.emit('change', {
+			'key' : key,
+			'data' : data
+		});
 	}
 
 }
