@@ -1,12 +1,13 @@
 {
   "private": true,
   "dependencies": {
+    "browserify": "^13.1.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0",
-    "watchify": "^3.7.0",
-    "browserify": "^13.1.1"
+    "watchify": "^3.7.0"
   },
-
   "scripts": {
     "build-js": "browserify js/app.js > js/result.js",
     "watch-js": "watchify js/app.js -o js/result.js"
