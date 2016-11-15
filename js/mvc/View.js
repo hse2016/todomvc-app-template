@@ -1,6 +1,6 @@
 (function () {
   const EventEmitter = require('./EventEmitter').EventEmitter;
-  const Helper = require('../mvc/Helper');
+  const Helper = require('./Helper');
 
   class View extends EventEmitter {
     constructor(props) {
@@ -15,8 +15,11 @@
       this.iniDOMLogic(_props);
     }
 
+    static define(props) {
+      return new View(props);
+    }
+
     iniDOMLogic(props) {
-      console.log('test');
       for (let i = 0; i < props.eventDef.length; ++i) {
         let _event = props.eventDef[i];
         if (_event) {
