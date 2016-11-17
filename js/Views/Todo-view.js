@@ -48,16 +48,17 @@ class TodoView extends Artemone.Views {
 		}
 	}
 
-	toggleVisible() {
-		if(this.isHidden())
+	toggleVisible(event, filter) {
+		if(this.isHidden(filter))
 			this.el.classList.add('hidden');
 		else
 			this.el.classList.remove('hidden');
 	}
 
-	isHidden() {
-		return this.model.get('completed') ? Artemone.app.TodoFilter === 'active' :
-		Artemone.app.TodoFilter === 'completed';
+	isHidden(filter) {
+		filter = filter || '';
+		return this.model.get('completed') ? filter === 'active' :
+		filter === 'completed';
 	}
 }
 

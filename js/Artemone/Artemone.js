@@ -6,7 +6,7 @@ var Events = require('./Events');
 var Models = require('./Model');
 var Views = require('./View');
 var Collection = require('./Collection');
-var Router = require('./Router')
+var Router = require('./Router');
 
 class Artemone {
 	constructor() {

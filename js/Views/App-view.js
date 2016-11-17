@@ -39,7 +39,7 @@ class AppView extends Artemone.Views {
 
 	}
 
-	render() {
+	render(text) {
 
 		var completed = this.model.models.length;
 		var remaining = this.model.models.length;
@@ -55,6 +55,7 @@ class AppView extends Artemone.Views {
 			[].forEach.call(links, function (el) {
 				el.classList.remove("selected");
 			});
+			console.log(Artemone.app.TodoFilter);
 			this.el.querySelector('[href="#/' + (Artemone.app.TodoFilter || '') + '"]').classList.add('selected');
 		}
 
@@ -82,11 +83,11 @@ class AppView extends Artemone.Views {
 	}
 
 	filterOne(todo) {
-		todo.emit('visible');
+		todo.emit('visible', this.filter);
 	}
 
 	filterAll () {
-		this.model.each(this.filterOne, this);
+		this.model.each(this.filterOne.bind(this), this);
 	}
 
 	createOnEnter(e) {
@@ -113,6 +114,11 @@ class AppView extends Artemone.Views {
 			item.destroy();
 		});
 		return false;
+	}
+
+	setTodoFilter(filter) {
+		this.filter = filter;
+		this.model.emit('filter');
 	}
 }
 
