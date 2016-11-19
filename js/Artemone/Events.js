@@ -72,8 +72,10 @@ class EventEmitter {
 		}
 	}
 
-	onKeyPress(context, selector, handle) {
-		document.querySelectorAll(selector)[0].onkeypress = handle.bind(context);
+	onKeyPress(context, element, selector, handle) {
+		let el = element.querySelector(selector)
+		el.onkeypress = handle.bind(context);
+		return el;
 	}
 
 	onClick(context, element, selector, handle) {

@@ -70,9 +70,12 @@ class Collection extends Events {
 		return JSON.stringify(result);
 	}
 
+	setName(name) {
+		this.name = name;
+		return this;
+	}
+
 	save() {
-		console.log(this);
-		console.log('Save');
 		if(this.storage === undefined){
 			console.log('Storage class doesn\'t init')
 			return false;
@@ -81,9 +84,7 @@ class Collection extends Events {
 	}
 
 	load() {
-		console.log(this);
-		console.log('Load');
-		var result = [];
+		let status = false;
 		if (this.storage === undefined) {
 			console.log('Storage class doesn\'t init');
 			return false;
@@ -94,13 +95,14 @@ class Collection extends Events {
 		for (var i in json_data) {
 			let item = new this.model(json_data[i]);
 			this.add(item);
+			status = true;
 		}
 
-		return true;
+		return status;
 	}
 
 	emitChange() {
-		this.emit('change');
+		this.emit('change-model');
 	}
 
 }

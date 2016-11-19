@@ -35,6 +35,13 @@ class Views extends Events {
 		return this;
 	}
 
+	setName(name) {
+		this.name = name;
+		if(this.model) {
+			this.model.setName(name)
+		}
+		return this;
+	}
 
 	setModel(model) {
 		this.model = model;

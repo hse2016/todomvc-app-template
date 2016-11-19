@@ -2,26 +2,38 @@
 	'use strict';
 
 	var Artemone = require('./Artemone/Artemone');
-	var AppView = require('./Views/app-view');
+	var ListView = require('./Views/List-view');
+	var AppView = require('./Views/App-view');
 	var router = new Artemone.Router();
 
 
-	var appView = new AppView();
-	appView.setElement('.todoapp');
-	appView.model.load();
+	var appView1 = new AppView();
+	appView1.setElement('#first').render();
+
+	var appView2 = new AppView();
+	appView2.setElement('#second').render();
+
+
+	var listView1 = new ListView();
+	listView1.setName('todolist1').setElement('#first .todoapp').render();
+	listView1.model.load();
+
+	var listView2 = new ListView();
+	listView2.setName('todolist2').setElement('#second .todoapp').render();
+	if(listView2.model.load() == false) {
+		listView2.render();
+	}
+
 
 	router
 		.add(/completed/, function () {
-			appView.setTodoFilter('completed');
-			appView.model.emit('filter');
+			// listView1.setTodoFilter('completed');
 		})
 		.add(/active/, function () {
-			appView.setTodoFilter('active');
-			appView.model.emit('filter');
+			// listView1.setTodoFilter('active');
 		})
 		.add(function () {
-			appView.setTodoFilter('');
-			appView.model.emit('filter');
+			// listView1.setTodoFilter('');
 		})
 		.listen();
 
