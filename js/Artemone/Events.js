@@ -90,10 +90,15 @@ class EventEmitter {
 			}
 		}
 
-		if(el_selector)
+		if(el_selector) {
 			el_selector.addEventListener("click", handle.bind(context));
-		else
-			element.addEventListener("click", handle.bind(context));
+			return el_selector;
+		}
+		else {
+			// element.addEventListener("click", handle.bind(context));
+			return undefined;
+		}
+
 
 	}
 }

@@ -9,6 +9,12 @@ class TodoView extends Artemone.Views {
 	constructor() {
 		super('li');
 		this.setTemplate('#template-todo');
+
+		this.dEvents = {
+			'click .toggle ': this.toggleCompleted,
+			'click .toggle': this.toggleVisible,
+			'click .destroy': this.destroy
+		}
 	}
 
 	initialize() {
@@ -18,9 +24,7 @@ class TodoView extends Artemone.Views {
 	}
 
 	events() {
-		this.onClick(this, this.el, '.toggle', this.toggleCompleted);
-		this.onClick(this, this.el, '.toggle', this.toggleVisible);
-		this.onClick(this, this.el, '.destroy', this.destroy);
+		this.delegateEvents();
 	}
 
 

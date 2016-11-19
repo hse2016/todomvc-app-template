@@ -14,6 +14,22 @@ class Views extends Events {
 		this.wrapTag();
 	}
 
+	delegateEvents() {
+		for(let i in this.dEvents) {
+			let type = i.split(' ', 1)[0];
+			let selector = i.slice(type.length, i.length);
+			switch(type) {
+				case 'click':
+					this.onClick(this, this.el, selector, this.dEvents[i]);
+					break;
+				case 'keypress':
+					this.onKeyPress(this, this.el, selector, this.dEvents[i]);
+					break;
+			}
+
+		}
+	}
+
 	initialize() {
 
 	}

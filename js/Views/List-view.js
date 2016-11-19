@@ -11,6 +11,12 @@ class ListView extends Artemone.Views {
 
 	constructor() {
 		super();
+
+		this.dEvents = {
+			'click .toggle-all': this.toggleAllComplete,
+			'click .clear-completed ': this.clearCompleted,
+			'keypress .new-todo': this.createOnEnter
+		}
 	}
 
 	initialize() {
@@ -33,9 +39,11 @@ class ListView extends Artemone.Views {
 		this.list = this.el.getElementsByClassName('todo-list');
 		this.footer = this.el.getElementsByClassName('footer');
 
-		this.onClick(this, this.allCheckBox, '', this.toggleAllComplete);
-		this.onClick(this, this.clearCompletedLink, '', this.clearCompleted);
-		this.onKeyPress(this, this.el, '.new-todo', this.createOnEnter);
+		// this.onClick(this, this.allCheckBox, '', this.toggleAllComplete);
+		// this.onClick(this, this.clearCompletedLink, '', this.clearCompleted);
+		// this.onKeyPress(this, this.el, '.new-todo', this.createOnEnter);
+
+		this.delegateEvents();
 
 	}
 
