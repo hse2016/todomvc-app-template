@@ -18,7 +18,7 @@ class ListView extends Artemone.Views {
 
 		this.listenTo(this.model, 'change', this.render, this);
 		this.listenTo(this.model, 'change', this.model.save.bind(this.model), this);
-		this.listenTo(this.model, 'change-model', this.model.save.bind(this.model), this);
+		this.listenTo(this.model, 'change-model', this.model.save, this);
 		this.listenTo(this.model, 'filter', this.filterAll, this);
 		this.listenTo(this.model, 'filter', this.render, this);
 		this.listenTo(this.model, 'add', this.renderModel, this);
