@@ -48,6 +48,7 @@ class Views extends Events {
 		this.listenTo(this.model, 'change', this.render, this);
 		this.listenTo(this.model, 'destroy', this.remove, this);
 		this.initialize();
+		return this;
 	}
 
 	setTemplate(path) {

@@ -9,7 +9,6 @@ class AppView extends Artemone.Views {
 
 	constructor() {
 		super();
-		this.setModel(new App());
 	}
 
 	initialize() {

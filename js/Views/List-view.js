@@ -11,7 +11,6 @@ class ListView extends Artemone.Views {
 
 	constructor() {
 		super();
-		this.setModel(new Todos());
 	}
 
 	initialize() {
