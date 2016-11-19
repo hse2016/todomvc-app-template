@@ -17,6 +17,7 @@ class ListView extends Artemone.Views {
 		this.setTemplate('#stats-template');
 
 		this.listenTo(this.model, 'change', this.render, this);
+		this.listenTo(this.model, 'change-model', this.render, this);
 		this.listenTo(this.model, 'change', this.model.save, this.model);
 		this.listenTo(this.model, 'change-model', this.model.save, this.model);
 		this.listenTo(this.model, 'filter', this.filterAll, this);
@@ -36,9 +37,6 @@ class ListView extends Artemone.Views {
 		this.onClick(this, this.clearCompletedLink, '', this.clearCompleted);
 		this.onKeyPress(this, this.el, '.new-todo', this.createOnEnter);
 
-		this.onClick(this, this.el, ".filters li a[href='#/completed']", this.showCompleted);
-		this.onClick(this, this.el, ".filters li a[href='#/']", this.showAll);
-		this.onClick(this, this.el, ".filters li a[href='#/active']", this.showActive);
 	}
 
 	render(text) {
@@ -62,8 +60,10 @@ class ListView extends Artemone.Views {
 
 		this.el.getElementsByClassName('toggle-all')[0].checked = !remaining;
 
-		this.events();
 
+		this.onClick(this, this.el, ".filters li a[href='#/completed']", this.showCompleted);
+		this.onClick(this, this.el, ".filters li a[href='#/']", this.showAll);
+		this.onClick(this, this.el, ".filters li a[href='#/active']", this.showActive);
 
 		return this;
 	}

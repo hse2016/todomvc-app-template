@@ -22,13 +22,13 @@
 
 
 	var listView1 = new ListView();
-	listView1.setModel(todosList1).setName('todolist1').setElement('#first .todoapp').render();
+	listView1.setModel(todosList1).setName('todolist1').setElement('#first .todoapp').render().events();
 	if(listView1.model.load() == false) {
 		listView1.render();
 	}
 
 	var listView2 = new ListView();
-	listView2.setModel(todosList2).setName('todolist2').setElement('#second .todoapp').render();
+	listView2.setModel(todosList2).setName('todolist2').setElement('#second .todoapp').render().events();
 	if(listView2.model.load() == false) {
 		listView2.render();
 	}
