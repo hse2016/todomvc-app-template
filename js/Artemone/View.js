@@ -96,7 +96,6 @@ class Views extends Events {
 	wrapTag() {
 		if(this.tag !== undefined) {
 			this.el = document.createElement(this.tag);
-			// this.el = "<" + this.tag + " id='" + this.model.id + "'>" + this.el + "</" + this.tag + ">";
 		}
 	}
 
@@ -104,6 +103,4 @@ class Views extends Events {
 
 module.exports = Views;
 
-// Your starting point. Enjoy the ride!
-// Write npm run watch-js to start coding
 

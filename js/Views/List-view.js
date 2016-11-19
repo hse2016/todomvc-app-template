@@ -36,16 +36,9 @@ class ListView extends Artemone.Views {
 		this.listenTo(this.model, 'filter', this.filterAll, this);
 		this.listenTo(this.model, 'filter', this.render, this);
 		this.listenTo(this.model, 'add', this.renderModel, this);
-
-		// this.list[0].innerHTML = '';
 	}
 
 	events() {
-		// this.allCheckBox = this.el.getElementsByClassName('toggle-all')[0];
-		// this.clearCompletedLink = this.el.getElementsByClassName('clear-completed')[0];
-		// this.list = this.el.getElementsByClassName('todo-list');
-		// this.footer = this.el.getElementsByClassName('footer');
-
 		this.setUI();
 		console.log(this.ui);
 		this.delegateEvents();
