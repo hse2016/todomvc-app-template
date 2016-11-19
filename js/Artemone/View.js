@@ -12,10 +12,14 @@ class Views extends Events {
 		super();
 		this.setTag(tag);
 		this.wrapTag();
+		this.ui = {};
 	}
 
-	delegateEvents() {
-		for(let i in this.dEvents) {
+	delegateEvents(data) {
+		if(data == undefined)
+			data = this.dEvents;
+		for(let i in data) {
+			console.log(i);
 			let type = i.split(' ', 1)[0];
 			let selector = i.slice(type.length, i.length);
 			switch(type) {
@@ -28,6 +32,19 @@ class Views extends Events {
 			}
 
 		}
+	}
+
+	updateEvent(name) {
+		let a = {};
+		a[name] = '';
+		this.delegateEvents(a);
+	}
+
+	setUI() {
+		for(let i in this.dUI) {
+			this.ui[i] = this.el.querySelector(this.dUI[i]);
+		}
+		return this;
 	}
 
 	initialize() {

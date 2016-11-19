@@ -13,9 +13,16 @@ class ListView extends Artemone.Views {
 		super();
 
 		this.dEvents = {
-			'click .toggle-all': this.toggleAllComplete,
-			'click .clear-completed ': this.clearCompleted,
-			'keypress .new-todo': this.createOnEnter
+			'click .toggle-all'		 : this.toggleAllComplete,
+			'click .clear-completed' : this.clearCompleted,
+			'keypress .new-todo'	 : this.createOnEnter
+		}
+
+		this.dUI = {
+			'allCheckBox' 		 : '.toggle-all',
+			'clearCompletedLink' : '.clear-completed',
+			'list' 				 : '.todo-list',
+			'footer' 			 : '.footer'
 		}
 	}
 
@@ -34,15 +41,13 @@ class ListView extends Artemone.Views {
 	}
 
 	events() {
-		this.allCheckBox = this.el.getElementsByClassName('toggle-all')[0];
-		this.clearCompletedLink = this.el.getElementsByClassName('clear-completed')[0];
-		this.list = this.el.getElementsByClassName('todo-list');
-		this.footer = this.el.getElementsByClassName('footer');
+		// this.allCheckBox = this.el.getElementsByClassName('toggle-all')[0];
+		// this.clearCompletedLink = this.el.getElementsByClassName('clear-completed')[0];
+		// this.list = this.el.getElementsByClassName('todo-list');
+		// this.footer = this.el.getElementsByClassName('footer');
 
-		// this.onClick(this, this.allCheckBox, '', this.toggleAllComplete);
-		// this.onClick(this, this.clearCompletedLink, '', this.clearCompleted);
-		// this.onKeyPress(this, this.el, '.new-todo', this.createOnEnter);
-
+		this.setUI();
+		console.log(this.ui);
 		this.delegateEvents();
 
 	}
@@ -52,10 +57,12 @@ class ListView extends Artemone.Views {
 		var completed = this.model.completed().length;
 		var remaining = this.model.remaining().length;
 
-		this.el.getElementsByClassName('footer')[0].innerHTML = this.template({
-			completed: completed,
-			remaining: remaining
-		});
+		if(this.ui.footer) {
+			this.ui.footer.innerHTML = this.template({
+				completed: completed,
+				remaining: remaining
+			});
+		}
 
 
 		if(this.el) {
@@ -66,12 +73,18 @@ class ListView extends Artemone.Views {
 			this.el.querySelector('[href="#/' + (this.filter || '') + '"]').classList.add('selected');
 		}
 
-		this.el.getElementsByClassName('toggle-all')[0].checked = !remaining;
+		if(this.ui.allCheckBox) {
+			this.ui.allCheckBox.checked = !remaining;
+		}
 
 
 		this.onClick(this, this.el, ".filters li a[href='#/completed']", this.showCompleted);
 		this.onClick(this, this.el, ".filters li a[href='#/']", this.showAll);
 		this.onClick(this, this.el, ".filters li a[href='#/active']", this.showActive);
+
+
+		console.log('XXXX');
+		this.updateEvent('click .clear-completed');
 
 		return this;
 	}
@@ -79,7 +92,7 @@ class ListView extends Artemone.Views {
 	renderModel(name, model) {
 		var todoView = new TodoView();
 		todoView.setModel(model);
-		this.list[0].appendChild(todoView.render().el);
+		this.ui.list.appendChild(todoView.render().el);
 	}
 
 	addOne(model) {
@@ -87,7 +100,7 @@ class ListView extends Artemone.Views {
 	}
 
 	addAll(models) {
-		this.list[0].innerHTML = '';
+		this.ui.list.innerHTML = '';
 		for (var i in models) {
 			this.addOne(models[i]);
 		}
@@ -112,7 +125,7 @@ class ListView extends Artemone.Views {
 	}
 
 	toggleAllComplete() {
-		var completed = this.allCheckBox.checked;
+		var completed = this.ui.allCheckBox.checked;
 		this.model.each(function (todo) {
 			todo.set({
 				completed: completed
@@ -121,7 +134,7 @@ class ListView extends Artemone.Views {
 	}
 
 	clearCompleted() {
-		var completed = this.model.completed()
+		var completed = this.model.completed();
 		completed.forEach(function(item, i, arr) {
 			item.destroy();
 		});
