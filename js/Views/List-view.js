@@ -17,8 +17,8 @@ class ListView extends Artemone.Views {
 		this.setTemplate('#stats-template');
 
 		this.listenTo(this.model, 'change', this.render, this);
-		this.listenTo(this.model, 'change', this.model.save.bind(this.model), this);
-		this.listenTo(this.model, 'change-model', this.model.save, this);
+		this.listenTo(this.model, 'change', this.model.save, this.model);
+		this.listenTo(this.model, 'change-model', this.model.save, this.model);
 		this.listenTo(this.model, 'filter', this.filterAll, this);
 		this.listenTo(this.model, 'filter', this.render, this);
 		this.listenTo(this.model, 'add', this.renderModel, this);
@@ -43,8 +43,8 @@ class ListView extends Artemone.Views {
 
 	render(text) {
 
-		var completed = this.model.models.length;
-		var remaining = this.model.models.length;
+		var completed = this.model.completed().length;
+		var remaining = this.model.remaining().length;
 
 		this.el.getElementsByClassName('footer')[0].innerHTML = this.template({
 			completed: completed,
@@ -60,7 +60,10 @@ class ListView extends Artemone.Views {
 			this.el.querySelector('[href="#/' + (this.filter || '') + '"]').classList.add('selected');
 		}
 
+		this.el.getElementsByClassName('toggle-all')[0].checked = !remaining;
+
 		this.events();
+
 
 		return this;
 	}

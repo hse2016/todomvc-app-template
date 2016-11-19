@@ -23,6 +23,10 @@ class Todos extends Artemone.Collection {
 		return this.where({completed: true});
 	}
 
+	remaining() {
+		return this.where({completed: false});
+	}
+
 }
 
 module.exports = Todos;
