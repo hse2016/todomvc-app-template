@@ -24,7 +24,7 @@ class TodoView extends BaseView {
     });
 
     this.setTemplate((id, todo) => `
-      <li id="todo_${id}" class="${todo.completed ? 'completed' : ''}">
+      <li id="todo_${id}" ${todo.completed ? 'class="completed"' : ''}>
         <div class="view">
           <input class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''}="">
           <label>${todo.title}</label>

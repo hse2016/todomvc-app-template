@@ -9,6 +9,8 @@ class AppView extends BaseView {
 
     this.setElements({
       clearCompleted: 'button.clear-completed',
+      footer: 'footer.footer',
+      main: 'section.main',
       newTodo: 'input.new-todo',
       todoCount: 'span.todo-count',
       todoList: 'ul.todo-list',
@@ -44,8 +46,10 @@ class AppView extends BaseView {
         count += todo.completed;
         return count;
       }, 0);
+    this.el.main.hidden = data.length === 0;
+    this.el.footer.hidden = data.length === 0;
     this.el.clearCompleted.hidden = completedCount === 0;
-    this.el.toggleAll.checked = completedCount === data.length;
+    this.el.toggleAll.checked = data.length > 0 && completedCount === data.length;
     this.el.todoCount.innerHTML = `<strong>${data.length}</strong> item${data.length === 1 ? '' : 's'} left`;
   }
 
