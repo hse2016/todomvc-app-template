@@ -1,6 +1,6 @@
 'use strict';
 
-const EventEmitter = require('./event_emitter');
+const EventEmitter = require('../event_emitter');
 
 class BaseModel extends EventEmitter {
   constructor() {

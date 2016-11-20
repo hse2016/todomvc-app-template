@@ -1,139 +1,71 @@
 'use strict';
 
-const BaseView = require('../base_view');
+const BaseView = require('../mvc_framework/base_view');
+const Utils = require('../utils');
 
 class TodoView extends BaseView {
-  constructor() {
-    super();
-    this.todo_list = document.querySelector('.todo-list');
+  constructor(mainElement, collection) {
+    super(mainElement, collection);
 
-    this.addOnAddNewTodoListener();
-    this.addOnClearCompletedListener();
-    this.addOnToggleAllListener();
-  }
+    this.setEvents({
+      'input.toggle': {
+        click: 'complete'
+      },
+      'label': {
+        dblclick: 'edit'
+      },
+      'button.destroy': {
+        click: 'delete'
+      },
+      'input.edit': {
+        keydown: 'updateInput',
+        blur: 'close'
+      }
+    });
 
-  renderTodoList(todos) {
-    let todo_count = 0;
-    let html = '';
-    for (let id in todos) {
-      const todo = todos[id];
-      html += this.todoTemplate(id, todo);
-      todo_count += !todo.is_completed;
-    }
-    this.todo_list.innerHTML = html;
-
-    this.hideMainAndFooter(Object.keys(todos).length === 0);
-    this.hideClearCompletedButton(todo_count === Object.keys(todos).length);
-    this.checkToggleAllButton(todo_count === 0);
-    this.changeItemsLeftCounter(todo_count);
-    this.addAllListeners(todos);
-  }
-
-  changeItemsLeftCounter(count) {
-    document.querySelector('span.todo-count').innerHTML = `<strong>${count}</strong> item${count === 1? '' : 's'} left`;
-  }
-
-  todoTemplate(id, todo) {
-    return (
-      `<li id="todo_${id}" class="${todo.is_completed ? 'completed' : ''} ${todo.is_editing ? 'editing' : ''}">
+    this.setTemplate((id, todo) => `
+      <li id="todo_${id}" class="${todo.completed ? 'completed' : ''}">
         <div class="view">
-          <input class="toggle" type="checkbox" ${todo.is_completed ? 'checked' : ''}>
+          <input class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''}="">
           <label>${todo.title}</label>
           <button class="destroy"></button>
         </div>
         <input class="edit" value="${todo.title}">
-      </li>`
-    );
+      </li>
+    `);
+
+    this.listenTo(collection, 'data_changed', () => this.render());
+
+    this.render();
   }
 
-  editTodo(id) {
-    const todo_li = this.todo_list.querySelector(`li#todo_${id}`);
-    todo_li.className += ' editing';
-    const todo_input = todo_li.querySelector('input.edit');
+  complete(id) {
+    this.collection.complete(id);
+  }
+
+  edit(id, element) {
+    Utils.addClass(element, 'editing');
+    const todo_input = element.querySelector('input.edit');
     todo_input.focus();
     todo_input.selectionStart = todo_input.value.length;
-
-    const source_title = todo_input.value;
-
-    todo_input.onblur = () => {
-      todo_input.value = source_title;
-      const pos = todo_li.className.search(' editing');
-      if (pos !== -1) {
-        todo_li.className = todo_li.className.substr(0, pos) + todo_li.className.substr(pos + 8);
-      }
-    };
-
-    todo_input.onkeyup = event => {
-      if (event.keyCode === 13) {
-        this.emit('edit_todo', id, todo_input.value.trim());
-      } else if (event.keyCode === 27) {
-        todo_input.blur();
-      }
-    };
   }
 
-  hideMainAndFooter(hide) {
-    document.querySelector('section.main').hidden = hide;
-    document.querySelector('footer.footer').hidden = hide;
-  }
-
-  addAllListeners(todos) {
-    for (let id in todos) {
-      this.addOnChangeListener(id);
-      this.addOnDeleteListener(id);
-      this.addOnEditListener(id);
+  updateInput(id, element, event) {
+    const todo_input = element.querySelector('input.edit');
+    if (event.keyCode === 13) {
+      this.collection.edit(id, todo_input.value.trim());
+    } else if (event.keyCode === 27) {
+      todo_input.blur();
     }
   }
 
-  addOnAddNewTodoListener() {
-    const new_todo = document.querySelector('.new-todo');
-    new_todo.onkeyup = event => {
-      if (event.keyCode === 13) {
-        const title = new_todo.value.trim();
-        if (title !== '') {
-          this.emit('add_new_todo', title);
-          new_todo.value = '';
-        }
-      }
-    };
+  delete(id) {
+    this.collection.delete(id);
   }
 
-
-  addOnClearCompletedListener() {
-    const clear_completed = document.querySelector('button.clear-completed');
-    clear_completed.onclick = () => {
-      this.emit('clear_completed');
-    };
-  }
-
-  hideClearCompletedButton(hide) {
-    document.querySelector('button.clear-completed').hidden = hide;
-  }
-
-  addOnToggleAllListener() {
-    const toggle_all = document.querySelector('input.toggle-all');
-    toggle_all.onclick = () => {
-      this.emit('toggle_all', toggle_all.checked);
-    };
-  }
-
-  checkToggleAllButton(check) {
-    document.querySelector('input.toggle-all').checked = check;
-  }
-
-  addOnChangeListener(id) {
-    this.todo_list.querySelector(`li#todo_${id} div.view input.toggle`)
-      .onchange = () => this.emit('change_state', id);
-  }
-
-  addOnDeleteListener(id) {
-    this.todo_list.querySelector(`li#todo_${id} div.view button.destroy`)
-      .onclick = () => this.emit('delete_todo', id);
-  }
-
-  addOnEditListener(id) {
-    this.todo_list.querySelector(`li#todo_${id} div.view label`)
-      .ondblclick = () => this.editTodo(id);
+  close(id, element) {
+    Utils.removeClass(element, 'editing');
+    element.querySelector('input.edit').value = this.collection.getById(id).title;
   }
 }
 

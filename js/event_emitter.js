@@ -12,26 +12,26 @@ class EventEmitter {
   */
   // subscribe to event
   on(eventName, handler) {
-      if (typeof this.listeners[eventName] === 'undefined') {
-        this.listeners[eventName] = [];
-      }
-      this.listeners[eventName].push(handler);
+    if (typeof this.listeners[eventName] === 'undefined') {
+      this.listeners[eventName] = [];
     }
-    // rise the event
+    this.listeners[eventName].push(handler);
+  }
+  // rise the event
   emit(eventName, ...args) {
-      if (typeof this.listeners[eventName] !== 'undefined') {
-        this.listeners[eventName].forEach(func => {
-          func(...args);
-        });
-      }
+    if (typeof this.listeners[eventName] !== 'undefined') {
+      this.listeners[eventName].forEach(func => {
+        func(...args);
+      });
     }
-    //unsubscribe from event
+  }
+  //unsubscribe from event
   off(eventName, handler) {
-      if (typeof this.listeners[eventName] !== 'undefined') {
-        this.listeners[eventName] = this.listeners[eventName].filter(listen => handler != listen);
-      }
+    if (typeof this.listeners[eventName] !== 'undefined') {
+      this.listeners[eventName] = this.listeners[eventName].filter(listen => handler != listen);
     }
-    //remove all subscribers
+  }
+  //remove all subscribers
   removeAll(eventName) {
     delete this.listeners[eventName];
   }

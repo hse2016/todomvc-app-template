@@ -1,5 +1,5 @@
 'use strict';
 
-const TodoController = require('./controllers/todo');
-
-const todo_controller = new TodoController();
+const TodoCollection = require('./collections/todo');
+const AppView = require('./views/app');
+new AppView(document, new TodoCollection());
