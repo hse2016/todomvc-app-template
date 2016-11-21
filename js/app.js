@@ -7,16 +7,14 @@ const AllController = require("./AllController");
 (function (window) {
 	'use strict';
 	let router = new Router(window, {
-		"": "all",
+		"all": "",
 		"completed": "completed",
 		"active": "active"
 	}, {
 		"all" : function () {
-			new AllController().openPage();
+			new AllController(router).openPage();
 		}
 	});
 
-	let allController = new AllController();
+	router.navigateTo("all");
 })(window);
-
-

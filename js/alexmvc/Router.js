@@ -1,14 +1,12 @@
-class Router {
-	constructor(history, routes, actions) {
-		this.history = history;
+module.exports = class Router {
+	constructor(window, routes, actions) {
+		this.window = window;
 		this.routes = routes;
 		this.actions = actions;
 	}
 
 	navigateTo(route) {
-		this.actions[this.routes[route]]();
-		this.history.pushState();
+		this.actions[route]();
+		this.window.history.pushState(route, "title", "#" + this.routes[route]);
 	}
-}
-
-module.exports = Router;
+};

@@ -1,7 +1,7 @@
 /**
  * Created by dalexiv on 11/20/16.
  */
-class Controller {
+module.exports = class Controller {
 	constructor(router) {
 		this.router = router;
 	}
@@ -10,6 +10,4 @@ class Controller {
 	openPage() {
 
 	}
-}
-
-module.exports = Controller;
+};
