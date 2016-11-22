@@ -11,10 +11,16 @@ const AllModel = require("./AllModel");
 		"active": "active"
 	}, {
 		"all" : function () {
-			let view = new AllView(window.document, {
-				"counter" : window.document.getElementById("todo-count")
+			let model = new AllModel(null);
+			let controller = new AllController(router, model);
+
+			let view = new AllView(window.document, controller, {
+				"counter" : window.document.getElementById("todo-count"),
+				"edittext" : window.document.getElementsByClassName("new-todo")[0]
 			});
-			new AllController(router, view, new AllModel()).openPage();
+
+			model.bindView(view);
+			controller.openPage();
 		}
 	});
 
