@@ -6,6 +6,6 @@ module.exports = class AllModel extends Model {
 	init(view) {
 		super.init(view);
 
-		view.views.count = "5";
+		view.views.counter.innerHTML = "5";
 	}
 };
