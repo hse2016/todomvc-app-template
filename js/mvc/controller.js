@@ -7,11 +7,10 @@ let Listener = require('./event-model').Listener;
  */
 
 class Controller extends Listener {
-	constructor(view, model) {
+	constructor(model) {
 		super();
 		this.model = model;
 	}
-
 }
 
 module.exports = Controller;

@@ -27,7 +27,7 @@ class View {
 			template += this.childs[i].render();
 		}
 
-		return Handlebars.compile(this.htmlItem.innerHTML())(this.);
+		//return Handlebars.compile(this.htmlItem.innerHTML())(this.);
 	}
 }
 
