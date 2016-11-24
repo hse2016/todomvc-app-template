@@ -1,7 +1,6 @@
 (function (window) {
 	'use strict';
+	let SMVC = require('./mvc/smvc');
 
-	// Your starting point. Enjoy the ride!
-	// Write npm run watch-js to start coding
 
 })(window);
