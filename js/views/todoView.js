@@ -13,7 +13,7 @@ class TodoView extends View {
 		}
 	}
 
-	
+
 }
 
 module.exports = TodoView;
