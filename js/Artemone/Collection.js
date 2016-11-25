@@ -44,12 +44,14 @@ class Collection extends Events {
 	}
 
 	where(params) {
-		const result = [];
-		for (let i = 0; i < this.models.length; i++) {
-			if (this.hasParams(this.models[i], params)) {
-				result.push(this.models[i]);
+		const wf = function whereFilter(item) {
+			if (this.hasParams(item, params)) {
+				return item;
 			}
-		}
+		};
+
+		const result = this.models.filter(wf.bind(this));
+
 		return result;
 	}
 
