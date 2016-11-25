@@ -20,6 +20,12 @@ class Todos extends Artemone.Collection {
 		this.model = Todo;
 	}
 
+	toggleAllComplete(completed) {
+		this.each((todo) => {
+			todo.setCompleted(completed);
+		});
+	}
+
 	completed() {
 		return this.where({ completed: true });
 	}

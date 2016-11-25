@@ -112,11 +112,7 @@ class ListView extends Artemone.Views {
 
 	toggleAllComplete() {
 		const completed = this.ui.allCheckBox.checked;
-		this.model.each((todo) => {
-			todo.set({
-				completed: completed,
-			});
-		});
+		this.model.toggleAllComplete(completed);
 	}
 
 	clearCompleted() {
