@@ -16,6 +16,7 @@ class Todos extends Artemone.Collection {
 	}
 
 	initialize() {
+		this.listenTo(this, 'change', this.save, this);
 		this.model = Todo;
 	}
 
