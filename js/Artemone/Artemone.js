@@ -2,11 +2,11 @@
  * Created by tema on 11.11.16.
  */
 
-var Events = require('./Events');
-var Models = require('./Model');
-var Views = require('./View');
-var Collection = require('./Collection');
-var Router = require('./Router');
+const Events = require('./Events');
+const Models = require('./Model');
+const Views = require('./View');
+const Collection = require('./Collection');
+const Router = require('./Router');
 
 class Artemone {
 	constructor() {
@@ -14,7 +14,7 @@ class Artemone {
 		this.Models = Models;
 		this.Views = Views;
 		this.Collection = Collection;
-		this.Router = Router
+		this.Router = Router;
 		this.app = {};
 	}
 }

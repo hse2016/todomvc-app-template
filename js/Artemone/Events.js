@@ -1,10 +1,9 @@
-'use strict';
+
 
 class EventEmitter {
 	constructor() {
 		this.listeners = {};
 		this.observables = {};
-
 	}
 
 	/*
@@ -15,27 +14,26 @@ class EventEmitter {
 		if (typeof this.listeners[eventName] === 'undefined') {
 			this.listeners[eventName] = [];
 		}
-		this.listeners[eventName].push({"Handler" : handler, "Context" : context});
+		this.listeners[eventName].push({ 'Handler' : handler, 'Context' : context });
 	}
 
 	// rise the event
 	emit(eventName, ...args) {
 		if (typeof this.listeners[eventName] !== 'undefined') {
-
-			this.listeners[eventName].forEach(func => {
-				func['Handler'].call(func['Context'], eventName, ...args);
+			this.listeners[eventName].forEach((func) => {
+				func.Handler.call(func.Context, eventName, ...args);
 			});
 		}
 	}
 
-	//unsubscribe from event
+	// unsubscribe from event
 	off(eventName, handler) {
 		if (typeof this.listeners[eventName] !== 'undefined') {
-			this.listeners[eventName] = this.listeners[eventName].filter(listen => handler != listen);
+			this.listeners[eventName] = this.listeners[eventName].filter(listen => handler !== listen);
 		}
 	}
 
-	//remove all subscribers
+	// remove all subscribers
 	removeAll(eventName) {
 		delete this.listeners[eventName];
 	}
@@ -54,52 +52,47 @@ class EventEmitter {
 		if (typeof this.observables[eventName] === 'undefined') {
 			this.observables[eventName] = [];
 		}
-		this.observables[eventName].push({observable, handler});
-
+		this.observables[eventName].push({ observable, handler });
 	}
 
 	unlistenFrom(observable, eventName) {
 		observable.off(eventName, this.observables[eventName].handler);
 		if (typeof this.observables[eventName] !== 'undefined') {
-			this.observables[eventName] = this.observables[eventName].filter(obs => obs.observable !== observable);
+			this.observables[eventName] = this.observables[eventName]
+											  .filter(obs => obs.observable !== observable);
 		}
 	}
 
 	unlistenAll() {
-		for (let key in this.observables) {
+		for (const key in this.observables) {
 			this.observables[key].forEach(obs => obs.observable.off(key, obs.handler));
 			delete this.observables[key];
 		}
 	}
 
 	onKeyPress(context, element, selector, handle) {
-		let el = element.querySelector(selector)
+		const el = element.querySelector(selector);
 		el.onkeypress = handle.bind(context);
 		return el;
 	}
 
 	onClick(context, element, selector, handle) {
+		let el_selector;
 
-		if(element === undefined)
+		if (element === undefined) {
 			return;
-
-		if(selector !== '' && selector != undefined) {
-			var el_selector = element.querySelector(selector);
-			if(el_selector !== null) {
-				// el_selector = el_selector[0];
-			}
 		}
 
-		if(el_selector) {
-			el_selector.addEventListener("click", handle.bind(context));
+		if (selector !== '' && selector !== undefined) {
+			el_selector = element.querySelector(selector);
+		}
+
+		if (el_selector) {
+			el_selector.addEventListener('click', handle.bind(context));
 			return el_selector;
 		}
-		else {
-			// element.addEventListener("click", handle.bind(context));
-			return undefined;
-		}
 
-
+		return undefined;
 	}
 }
 

@@ -2,16 +2,16 @@
  * Created by tema on 11.11.16.
  */
 
-var Artemone = require('./../Artemone/Artemone');
-var Todo = require('./../Models/todo');
-var LocalStorage = require('./../Artemone/LocalStorage');
+const Artemone = require('./../Artemone/Artemone');
+const Todo = require('./../Models/todo');
+const LocalStorage = require('./../Artemone/LocalStorage');
 
 class Todos extends Artemone.Collection {
 
 	constructor() {
 		super();
 		this.initialize();
-		this.name = "Todos";
+		this.name = 'Todos';
 		this.storage = new LocalStorage();
 	}
 
@@ -20,11 +20,11 @@ class Todos extends Artemone.Collection {
 	}
 
 	completed() {
-		return this.where({completed: true});
+		return this.where({ completed: true });
 	}
 
 	remaining() {
-		return this.where({completed: false});
+		return this.where({ completed: false });
 	}
 
 }

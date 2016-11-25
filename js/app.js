@@ -1,51 +1,61 @@
-(function (window) {
-	'use strict';
+(function () {
+	const Artemone = require('./Artemone/Artemone');
+	const ListView = require('./Views/List-view');
+	const AppView = require('./Views/App-view');
+	const AppModel = require('./Models/App');
+	const Todos = require('./Collections/Todos');
+	const router = new Artemone.Router();
 
-	var Artemone = require('./Artemone/Artemone');
-	var ListView = require('./Views/List-view');
-	var AppView = require('./Views/App-view');
-	var AppModel = require('./Models/App');
-	var Todos = require('./Collections/Todos');
-	var router = new Artemone.Router();
+	const appModel = new AppModel({ title: 'aTodos' });
+
+	const todosList1 = new Todos();
+	const todosList2 = new Todos();
+
+	const appView1 = new AppView();
+	appView1.setModel(appModel)
+		.setElement('#first')
+		.render();
+
+	const appView2 = new AppView();
+	appView2.setModel(appModel)
+		.setElement('#second')
+		.render();
 
 
-	var appModel = new AppModel({title : "aTodos"});
+	const listView1 = new ListView();
+	listView1.setModel(todosList1)
+		.setName('todolist1')
+		.setElement('#first .todoapp')
+		.render()
+		.events();
 
-	var todosList1 = new Todos();
-	var todosList2 = new Todos();
-
-	var appView1 = new AppView();
-	appView1.setModel(appModel).setElement('#first').render();
-
-	var appView2 = new AppView();
-	appView2.setModel(appModel).setElement('#second').render();
-
-
-	var listView1 = new ListView();
-	listView1.setModel(todosList1).setName('todolist1').setElement('#first .todoapp').render().events();
-	if(listView1.model.load() == false) {
+	if (listView1.model.load() === false) {
 		listView1.render();
 	}
 
-	var listView2 = new ListView();
-	listView2.setModel(todosList2).setName('todolist2').setElement('#second .todoapp').render().events();
-	if(listView2.model.load() == false) {
+	const listView2 = new ListView();
+	listView2.setModel(todosList2)
+		.setName('todolist2')
+		.setElement('#second .todoapp')
+		.render()
+		.events();
+
+	if (listView2.model.load() === false) {
 		listView2.render();
 	}
 
 
 	router
-		.add(/completed/, function () {
+		.add(/completed/, () => {
 			// listView1.setTodoFilter('completed');
 		})
-		.add(/active/, function () {
+		.add(/active/, () => {
 			// listView1.setTodoFilter('active');
 		})
-		.add(function () {
+		.add(() => {
 			// listView1.setTodoFilter('');
 		})
 		.listen();
 
 	router.navigate('/');
-
-})(window);
+}());

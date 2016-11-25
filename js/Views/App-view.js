@@ -2,14 +2,9 @@
  * Created by tema on 19.11.16.
  */
 
-var Artemone = require('./../Artemone/Artemone');
-var App = require('./../Models/App');
+const Artemone = require('./../Artemone/Artemone');
 
 class AppView extends Artemone.Views {
-
-	constructor() {
-		super();
-	}
 
 	initialize() {
 		this.setTemplate('#todoapp');

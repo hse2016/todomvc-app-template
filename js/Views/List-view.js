@@ -2,10 +2,9 @@
  * Created by tema on 11.11.16.
  */
 
-var Artemone = require('./../Artemone/Artemone');
-var TodoView = require('./todo-view');
-var Todos = require('./../Collections/todos');
-var Todo = require('./../Models/todo');
+const Artemone = require('./../Artemone/Artemone');
+const TodoView = require('./todo-view');
+const Todo = require('./../Models/todo');
 
 class ListView extends Artemone.Views {
 
@@ -13,17 +12,17 @@ class ListView extends Artemone.Views {
 		super();
 
 		this.dEvents = {
-			'click .toggle-all'		 : this.toggleAllComplete,
-			'click .clear-completed' : this.clearCompleted,
-			'keypress .new-todo'	 : this.createOnEnter
-		}
+			'click .toggle-all': this.toggleAllComplete,
+			'click .clear-completed': this.clearCompleted,
+			'keypress .new-todo': this.createOnEnter,
+		};
 
 		this.dUI = {
 			'allCheckBox' 		 : '.toggle-all',
 			'clearCompletedLink' : '.clear-completed',
 			'list' 				 : '.todo-list',
-			'footer' 			 : '.footer'
-		}
+			'footer' 			 : '.footer',
+		};
 	}
 
 	initialize() {
@@ -40,33 +39,30 @@ class ListView extends Artemone.Views {
 
 	events() {
 		this.setUI();
-		console.log(this.ui);
 		this.delegateEvents();
-
 	}
 
-	render(text) {
+	render() {
+		const completed = this.model.completed().length;
+		const remaining = this.model.remaining().length;
 
-		var completed = this.model.completed().length;
-		var remaining = this.model.remaining().length;
-
-		if(this.ui.footer) {
+		if (this.ui.footer) {
 			this.ui.footer.innerHTML = this.template({
 				completed: completed,
-				remaining: remaining
+				remaining: remaining,
 			});
 		}
 
 
-		if(this.el) {
-			var links = this.el.querySelectorAll('.filters li a');
-			[].forEach.call(links, function (el) {
-				el.classList.remove("selected");
+		if (this.el) {
+			const links = this.el.querySelectorAll('.filters li a');
+			[].forEach.call(links, (el) => {
+				el.classList.remove('selected');
 			});
-			this.el.querySelector('[href="#/' + (this.filter || '') + '"]').classList.add('selected');
+			this.el.querySelector(`[href="#/${this.filter || ''}"]`).classList.add('selected');
 		}
 
-		if(this.ui.allCheckBox) {
+		if (this.ui.allCheckBox) {
 			this.ui.allCheckBox.checked = !remaining;
 		}
 
@@ -76,14 +72,13 @@ class ListView extends Artemone.Views {
 		this.onClick(this, this.el, ".filters li a[href='#/active']", this.showActive);
 
 
-		console.log('XXXX');
 		this.updateEvent('click .clear-completed');
 
 		return this;
 	}
 
 	renderModel(name, model) {
-		var todoView = new TodoView();
+		const todoView = new TodoView();
 		todoView.setModel(model);
 		this.ui.list.appendChild(todoView.render().el);
 	}
@@ -94,41 +89,40 @@ class ListView extends Artemone.Views {
 
 	addAll(models) {
 		this.ui.list.innerHTML = '';
-		for (var i in models) {
+		for (const i in models) {
 			this.addOne(models[i]);
 		}
-
 	}
 
 	filterOne(todo) {
 		todo.emit('visible', this.filter);
 	}
 
-	filterAll () {
+	filterAll() {
 		this.model.each(this.filterOne.bind(this), this);
 	}
 
 	createOnEnter(e) {
-		if (e.keyCode == 13) {
-			var text = this.el.getElementsByClassName('new-todo')[0].value;
+		if (e.keyCode === 13) {
+			const text = this.el.getElementsByClassName('new-todo')[0].value;
 			this.el.getElementsByClassName('new-todo')[0].value = '';
-			var newTodo = new Todo({'title': text});
+			const newTodo = new Todo({ 'title': text });
 			this.addOne(newTodo);
 		}
 	}
 
 	toggleAllComplete() {
-		var completed = this.ui.allCheckBox.checked;
-		this.model.each(function (todo) {
+		const completed = this.ui.allCheckBox.checked;
+		this.model.each((todo) => {
 			todo.set({
-				completed: completed
+				completed: completed,
 			});
 		});
 	}
 
 	clearCompleted() {
-		var completed = this.model.completed();
-		completed.forEach(function(item, i, arr) {
+		const completed = this.model.completed();
+		completed.forEach((item) => {
 			item.destroy();
 		});
 		return false;

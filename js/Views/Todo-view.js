@@ -2,7 +2,7 @@
  * Created by tema on 11.11.16.
  */
 
-var Artemone = require('./../Artemone/Artemone');
+const Artemone = require('./../Artemone/Artemone');
 
 class TodoView extends Artemone.Views {
 
@@ -13,12 +13,12 @@ class TodoView extends Artemone.Views {
 		this.dEvents = {
 			'click .toggle ': this.toggleCompleted,
 			'click .toggle': this.toggleVisible,
-			'click .destroy': this.destroy
-		}
+			'click .destroy': this.destroy,
+		};
 	}
 
 	initialize() {
-		if(this.model) {
+		if (this.model) {
 			this.listenTo(this.model, 'visible', this.toggleVisible, this);
 		}
 	}
@@ -45,18 +45,19 @@ class TodoView extends Artemone.Views {
 	}
 
 	checkCompleted() {
-		if(this.model.get('completed')) {
-			this.el.classList.add("completed");
+		if (this.model.get('completed')) {
+			this.el.classList.add('completed');
 		} else {
-			this.el.classList.remove("completed");
+			this.el.classList.remove('completed');
 		}
 	}
 
 	toggleVisible(event, filter) {
-		if(this.isHidden(filter))
+		if (this.isHidden(filter)) {
 			this.el.classList.add('hidden');
-		else
+		} else {
 			this.el.classList.remove('hidden');
+		}
 	}
 
 	isHidden(filter) {

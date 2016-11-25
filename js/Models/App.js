@@ -2,17 +2,16 @@
  * Created by tema on 19.11.16.
  */
 
-var Artemone = require('./../Artemone/Artemone');
+const Artemone = require('./../Artemone/Artemone');
 
 class App extends Artemone.Models {
 	constructor(attributes) {
-
 		super();
 		this.set({
 			title: 'todos',
 		});
 
-		if(attributes !== undefined) {
+		if (attributes !== undefined) {
 			this.set(attributes);
 		}
 	}
