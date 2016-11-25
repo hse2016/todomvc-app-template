@@ -46,11 +46,12 @@ class AppView extends BaseView {
         count += todo.completed;
         return count;
       }, 0);
+    const itemsLeft = data.length - completedCount;
     this.el.main.hidden = data.length === 0;
     this.el.footer.hidden = data.length === 0;
     this.el.clearCompleted.hidden = completedCount === 0;
     this.el.toggleAll.checked = data.length > 0 && completedCount === data.length;
-    this.el.todoCount.innerHTML = `<strong>${data.length}</strong> item${data.length === 1 ? '' : 's'} left`;
+    this.el.todoCount.innerHTML = `<strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left`;
   }
 
   clear() {
