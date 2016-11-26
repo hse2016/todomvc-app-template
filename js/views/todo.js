@@ -43,14 +43,16 @@ class TodoView extends BaseView {
   }
 
   edit(id, element) {
-    Utils.addClass(element, 'editing');
-    const todo_input = element.querySelector('input.edit');
+    const parent = element.parentElement.parentElement;
+    Utils.addClass(parent, 'editing');
+    const todo_input = parent.querySelector('input.edit');
     todo_input.focus();
     todo_input.selectionStart = todo_input.value.length;
   }
 
   updateInput(id, element, event) {
-    const todo_input = element.querySelector('input.edit');
+    const parent = element.parentElement;
+    const todo_input = parent.querySelector('input.edit');
     if (event.keyCode === 13) {
       this.collection.edit(id, todo_input.value.trim());
     } else if (event.keyCode === 27) {
@@ -63,8 +65,9 @@ class TodoView extends BaseView {
   }
 
   close(id, element) {
-    Utils.removeClass(element, 'editing');
-    element.querySelector('input.edit').value = this.collection.getById(id).title;
+    const parent = element.parentElement;
+    Utils.removeClass(parent, 'editing');
+    parent.querySelector('input.edit').value = this.collection.getById(id).title;
   }
 }
 
