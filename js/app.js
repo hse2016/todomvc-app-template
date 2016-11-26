@@ -1,49 +1,37 @@
 (function () {
 	const Artemone = require('./Artemone/Artemone');
-	const ListView = require('./Views/List-view');
 	const AppView = require('./Views/App-view');
 	const AppModel = require('./Models/App');
-	const Todos = require('./Collections/Todos');
+	const Lists = require('./Collections/Lists');
 	const router = new Artemone.Router();
 
-	const appModel = new AppModel({ title: 'aTodos' });
+	// const appModel = new AppModel({ title: 'aTodos' });
 
-	const todosList1 = new Todos();
-	const todosList2 = new Todos();
-
-	const appView1 = new AppView();
-	appView1.setModel(appModel)
-		.setElement('#first')
-		.render();
-
-	const appView2 = new AppView();
-	appView2.setModel(appModel)
-		.setElement('#second')
-		.render();
+	const appView = new AppView();
+	const lists = new Lists();
+	lists.setName('lists');
+	appView.attach('.lists').setModel(lists);
 
 
-	const listView1 = new ListView();
-	listView1.setModel(todosList1)
-		.setName('todolist1')
-		.setElement('#first .todoapp')
-		.render()
-		.events();
+	appView.model.load().then((result) => {
+			result.loadTodos();
+		},
+		(error) => {
+			const appModel = new AppModel({ title: 'Todos' });
+			appView.model.add(appModel);
+			console.log(error);
+		});
 
-	if (listView1.model.load() === false) {
-		listView1.render();
+
+	const add_list = document.querySelector('.add-list');
+
+	function addList() {
+		const newAppModel = new AppModel({ title: 'Todos' });
+		appView.model.add(newAppModel);
+		appView.model.loadTodo(newAppModel);
 	}
 
-	const listView2 = new ListView();
-	listView2.setModel(todosList2)
-		.setName('todolist2')
-		.setElement('#second .todoapp')
-		.render()
-		.events();
-
-	if (listView2.model.load() === false) {
-		listView2.render();
-	}
-
+	add_list.addEventListener('click', addList);
 
 	router
 		.add(/completed/, () => {

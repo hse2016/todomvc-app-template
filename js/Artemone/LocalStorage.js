@@ -8,6 +8,10 @@ class LocalStorage {
 		return true;
 	}
 
+	remove(key) {
+		localStorage.removeItem(key);
+	}
+
 	load(key) {
 		return localStorage.getItem(key);
 	}

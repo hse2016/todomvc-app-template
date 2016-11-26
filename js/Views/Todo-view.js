@@ -20,6 +20,7 @@ class TodoView extends Artemone.Views {
 	initialize() {
 		if (this.model) {
 			this.listenTo(this.model, 'visible', this.toggleVisible, this);
+			this.listenTo(this.model, 'change', this.render, this);
 		}
 	}
 

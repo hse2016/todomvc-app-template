@@ -27,6 +27,12 @@ class Collection extends Events {
 		this.remove(model);
 	}
 
+	clear() {
+		for (const i in this.models) {
+			this.remove(this.models[i]);
+		}
+	}
+
 	remove(model) {
 		const index = this.models.indexOf(model);
 		if (index > -1) {
@@ -34,6 +40,12 @@ class Collection extends Events {
 		}
 		this.emit('remove');
 		this.emit('change');
+	}
+
+	removeAll(models) {
+		for (const i in models) {
+			this.remove(models[i]);
+		}
 	}
 
 	each(func, context) {
@@ -84,21 +96,30 @@ class Collection extends Events {
 		this.storage.save(this.name, JSON.stringify(this.toString()));
 	}
 
-	load() {
-		let status = false;
+	unsave() {
 		if (this.storage === undefined) {
 			return false;
 		}
+		this.storage.remove(this.name);
+	}
 
-		const loadedString = this.storage.load(this.name);
-		const jsonData = eval(JSON.parse(loadedString));
-		for (const i in jsonData) {
-			const item = new this.model(jsonData[i]);
-			this.add(item);
-			status = true;
-		}
+	load() {
+		const promise = new Promise((resolve, reject) => {
+			if (this.storage === undefined) {
+				reject("Can't find collection in datastore");
+			}
 
-		return status;
+			const loadedString = this.storage.load(this.name);
+			const jsonData = eval(JSON.parse(loadedString));
+			for (const i in jsonData) {
+				const item = new this.model(jsonData[i]);
+				this.add(item);
+			}
+
+			resolve(this);
+		});
+
+		return promise;
 	}
 
 	emitChange() {

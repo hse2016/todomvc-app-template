@@ -8,11 +8,13 @@ const Events = require('./Events');
 
 class Views extends Events {
 
-	constructor(tag) {
+	constructor(tag, _class, _id) {
 		super();
 		this.setTag(tag);
-		this.wrapTag();
 		this.ui = {};
+		this.id = _id;
+		this.class = _class;
+		this.wrapTag();
 	}
 
 	delegateEvents(data) {
@@ -41,7 +43,7 @@ class Views extends Events {
 	}
 
 	initialize() {
-
+		return this;
 	}
 
 	render() {
@@ -53,7 +55,14 @@ class Views extends Events {
 	}
 
 	remove() {
-		this.el.outerHTML = '';
+		// this.el.outerHTML = '';
+		return this;
+	}
+
+	attach(selector) {
+		const el = document.querySelector(selector);
+		el.appendChild(this.el);
+		return this;
 	}
 
 	setElement(selector) {
@@ -71,7 +80,7 @@ class Views extends Events {
 
 	setModel(model) {
 		this.model = model;
-		this.listenTo(this.model, 'change', this.render, this);
+		// this.listenTo(this.model, 'change', this.render, this);
 		this.listenTo(this.model, 'destroy', this.remove, this);
 		this.initialize();
 		return this;
@@ -88,6 +97,12 @@ class Views extends Events {
 	wrapTag() {
 		if (this.tag !== undefined) {
 			this.el = document.createElement(this.tag);
+			if (this.id) {
+				this.el.id = this.id;
+			}
+			if (this.class) {
+				this.el.className = this.class;
+			}
 		}
 	}
 

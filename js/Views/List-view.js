@@ -8,13 +8,14 @@ const Todo = require('./../Models/todo');
 
 class ListView extends Artemone.Views {
 
-	constructor() {
+	constructor(id) {
 		super();
 
 		this.dEvents = {
 			'click .toggle-all': this.toggleAllComplete,
 			'click .clear-completed': this.clearCompleted,
 			'keypress .new-todo': this.createOnEnter,
+			'click .delete-list': this.destroy,
 		};
 
 		this.dUI = {
@@ -24,6 +25,8 @@ class ListView extends Artemone.Views {
 			'footer' 			 : '.footer',
 			'newTodo' 			 : '.new-todo',
 		};
+
+		this.id = id;
 	}
 
 	initialize() {
@@ -73,6 +76,7 @@ class ListView extends Artemone.Views {
 
 
 		this.updateEvent('click .clear-completed');
+		this.updateEvent('click .delete-list');
 
 		return this;
 	}
@@ -139,6 +143,12 @@ class ListView extends Artemone.Views {
 	setTodoFilter(filter) {
 		this.filter = filter;
 		this.model.emit('filter');
+	}
+
+	destroy() {
+		this.model.destroy(this.id);
+		this.model.unsave();
+		this.el.remove();
 	}
 }
 

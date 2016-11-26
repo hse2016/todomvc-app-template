@@ -7,14 +7,17 @@
     "underscore": "^1.8.3",
     "watchify": "^3.7.0"
   },
+
   "scripts": {
     "build-js": "browserify js/app.js > js/result.js",
     "watch-js": "watchify js/app.js -o js/result.js",
     "test": "echo \"Error: I SHOULD FAIL LOLOLOLOLOL \" && exit 1",
     "foo": "echo \"fooo\" && exit 0",
     "bar": "echo \"bar\" && exit 0",
-    "check-eslint" : "./node_modules/.bin/eslint ./"
+    "check-eslint" : "./node_modules/.bin/eslint ./",
+    "postinstall": "webpack --config ./webpack-prod.config.js --progress --colors"
   },
+
   "devDependencies": {
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",

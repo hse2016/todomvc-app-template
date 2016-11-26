@@ -34,6 +34,10 @@ class Todos extends Artemone.Collection {
 		return this.where({ completed: false });
 	}
 
+	destroy(id) {
+		this.emit('destroy', id);
+	}
+
 }
 
 module.exports = Todos;

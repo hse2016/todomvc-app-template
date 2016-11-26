@@ -6,3 +6,70 @@ remove this comment if used
 remove this file if not
 
 */
+
+@keyframes example {
+	from {
+		transform: translateX(-1400px);
+	}
+	to {
+		transform: translateX(0px);
+	}
+}
+
+.add-list {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: white;
+	border-radius: 7px;
+	text-decoration: none;
+	font-size: 18px;
+	margin-top: 15px;
+}
+
+.add-list:hover {
+	cursor: pointer;
+	background-color: #fbf0ef;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.18);
+}
+
+.todoapp {
+	animation-name: example;
+	animation-duration: 3s;
+}
+
+.delete-list {
+	float: right;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+
+
+.delete-list {
+	padding-right: 15px;
+	padding-top: 15px;
+	width: 20px;
+	height: 20px;
+	margin: auto 0;
+	font-size: 30px;
+	color: #cc9a9a;
+	margin-bottom: 11px;
+	transition: color 0.2s ease-out;
+	text-decoration: none;
+}
+
+.delete-list:hover {
+	color: #af5b5e;
+	cursor: pointer;
+}
+
+.delete-list:after {
+	content: '×';
+}
+
+.todoapp h1 {
+	top: -120px;
+	font-size: 70px;
+}
