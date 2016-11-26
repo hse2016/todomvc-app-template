@@ -16,6 +16,10 @@ class BaseCollection extends EventEmitter {
   getData() {
     return this._data;
   }
+
+  forEach(callback, thisArg) {
+    this._data.forEach(callback, thisArg);
+  }
 }
 
 module.exports = BaseCollection;

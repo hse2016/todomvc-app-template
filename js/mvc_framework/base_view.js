@@ -10,11 +10,7 @@ class BaseView extends EventEmitter {
   }
 
   setElements(elements) {
-    this.el = {};
-    for (let element in elements) {
-      const selector = elements[element];
-      this.el[element] = this.mainElement.querySelector(selector);
-    }
+    this._elements = elements;
   }
 
   setEvents(events) {
@@ -26,49 +22,70 @@ class BaseView extends EventEmitter {
   }
 
   setViews(views) {
-    this.view = {};
+    this._views = views;
+
+
+    /*
     for (let viewName in views) {
       const [viewClass, mainElement, collection] = views[viewName];
       this.view[viewName] = new viewClass(mainElement, collection);
     }
+    */
   }
 
-  delegateEvents(element, id) {
-    if (element === undefined) {
-      for (let element in this._events) {
-        for (let event in this._events[element]) {
-          if (this.el[element] !== undefined) {
-            const method = this._events[element][event];
-            this.el[element].addEventListener(event, (...args) => this[method](...args));
-          }
-        }
+  delegateViews() {
+    this.views = [];
+    if (this._views !== undefined) {
+      this._views.forEach(({ViewClass, selector, model}) => {
+        const element = this.mainElement.querySelector(selector);
+        this.views.push(new ViewClass(element, model));
+      });
+    }
+  }
+
+  delegateElements(doc) {
+    this.el = {};
+    if (doc === undefined) {
+      for (let element in this._elements) {
+        const selector = this._elements[element];
+        this.el[element] = this.mainElement.querySelector(selector);
       }
     } else {
-      for (let selector in this._events) {
-        for (let event in this._events[selector]) {
-          if (this.el === undefined || this.el[selector] === undefined) {
-            const method = this._events[selector][event];
-            element.querySelector(selector)
-              .addEventListener(event, (...args) => this[method](id, element, ...args));
-          }
-        }
+      for (let element in this._elements) {
+        const selector = this._elements[element];
+        this.el[element] = doc.querySelector(selector);
+      }
+    }
+  }
+
+  delegateEvents(doc, id) {
+    for (let name in this._events) {
+      let element;
+      if (this.el[name] === undefined) {
+        const selector = name;
+        element = doc.querySelector(selector);
+      } else {
+        element = this.el[name];
+      }
+      for (let event in this._events[name]) {
+        const method = this._events[name][event];
+        element.addEventListener(event, (...args) => this[method](id, element, ...args));
       }
     }
   }
 
   render() {
-    while (this.mainElement.firstChild) {
-      this.mainElement.removeChild(this.mainElement.firstChild);
-    }
+    this.mainElement.innerHTML = '';
 
-    const data = this.collection.getData();
-    data.forEach(item => {
+    this.collection.forEach(item => {
       const item_tmp = document.createElement('div');
       item_tmp.innerHTML = this.template(item.id, item).trim();
       const element = item_tmp.firstChild;
 
+      this.delegateElements(element);
       this.delegateEvents(element, item.id);
       this.mainElement.appendChild(element);
+      this.delegateViews();
     });
   }
 }

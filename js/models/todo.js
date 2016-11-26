@@ -3,10 +3,9 @@
 const BaseModel = require('../mvc_framework/base_model');
 
 class TodoModel extends BaseModel {
-  constructor({title, completed}) {
+  constructor(data) {
     super();
-    this.title = title;
-    this.completed = completed;
+    this.setData(data);
   }
 }
 

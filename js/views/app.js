@@ -29,45 +29,107 @@ class AppView extends BaseView {
       }
     });
 
+    /*
     this.setViews({
-      todoView: [TodoView, this.el.todoList, this.collection]
+      todoView: [TodoView, this.el.todoList, this.collection.todoCollection]
     });
+    */
 
-    this.listenTo(collection, 'data_changed', () => this.render());
+    this.listenTo(collection.todoCollection, 'data_changed', () => this.render());
 
+    /*
+    this.delegateElements();
     this.render();
     this.delegateEvents();
-  }
+    */
 
+    this.setTemplate(() => {
+      const data = this.collection.todoCollection.getData();
+      const completedCount = this.collection.todoCollection.getData()
+        .reduce((count, todo) => {
+          count += todo.completed;
+          return count;
+        }, 0);
+      const itemsLeft = data.length - completedCount;
+
+      return (`
+        <div>
+        <header class="header">
+          <h1>todos</h1>
+          <input class="new-todo" placeholder="What needs to be done?" autofocus>
+        </header>
+        <section class="main" ${data.length === 0 ? 'hidden' : ''}>
+          <input class="toggle-all" type="checkbox" ${data.length > 0 && completedCount === data.length ? 'checked' : ''}>
+          <label for="toggle-all">Mark all as complete</label>
+          <ul class="todo-list"></ul>
+        </section>
+        <footer class="footer" ${data.length === 0 ? 'hidden' : ''}>
+          <span class="todo-count">
+            <strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left
+          </span>
+          <ul class="filters">
+            <li>
+              <a class="selected" href="#/">All</a>
+            </li>
+            <li>
+              <a href="#/active">Active</a>
+            </li>
+            <li>
+              <a href="#/completed">Completed</a>
+            </li>
+          </ul>
+          <button class="clear-completed" ${completedCount === 0 ? 'hidden' : ''}>
+            Clear completed
+          </button>
+        </footer>
+        </div>
+      `);
+    });
+
+
+    this.setViews([
+      {
+        ViewClass: TodoView,
+        selector: 'ul.todo-list',
+        model: this.collection.todoCollection
+      }
+    ]);
+
+    this.render();
+
+  }
+  /*
   render() {
-    const data = this.collection.getData();
-    const completedCount = this.collection.getData()
+    const data = this.collection.todoCollection.getData();
+    const completedCount = this.collection.todoCollection.getData()
       .reduce((count, todo) => {
         count += todo.completed;
         return count;
       }, 0);
     const itemsLeft = data.length - completedCount;
+
     this.el.main.hidden = data.length === 0;
     this.el.footer.hidden = data.length === 0;
     this.el.clearCompleted.hidden = completedCount === 0;
     this.el.toggleAll.checked = data.length > 0 && completedCount === data.length;
     this.el.todoCount.innerHTML = `<strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left`;
   }
+  */
 
   clear() {
-    this.collection.clearСompleted();
+    this.collection.todoCollection.clearСompleted();
   }
 
-  add(event) {
+  add(_, __, event) {
     const title = this.el.newTodo.value.trim();
     if (event.keyCode === 13 && title.length > 0) {
-      this.collection.add(title);
+      this.collection.todoCollection.add(title);
       this.el.newTodo.value = '';
     }
   }
 
   toggle() {
-    this.collection.toggleAll(this.el.toggleAll.checked);
+    this.collection.todoCollection.toggleAll(this.el.toggleAll.checked);
   }
 }
 
