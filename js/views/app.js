@@ -7,53 +7,39 @@ class AppView extends BaseView {
   constructor(mainElement, collection) {
     super(mainElement, collection);
 
-    this.setElements({
-      clearCompleted: 'button.clear-completed',
-      footer: 'footer.footer',
-      main: 'section.main',
-      newTodo: 'input.new-todo',
-      todoCount: 'span.todo-count',
-      todoList: 'ul.todo-list',
-      toggleAll: 'input.toggle-all'
-    });
-
-    this.setEvents({
-      clearCompleted: {
-        click: 'clear'
-      },
-      newTodo: {
-        keydown: 'add'
-      },
-      toggleAll: {
-        click: 'toggle'
-      }
-    });
-
-    /*
-    this.setViews({
-      todoView: [TodoView, this.el.todoList, this.collection.todoCollection]
-    });
-    */
-
     this.listenTo(collection.todoCollection, 'data_changed', () => this.render());
 
-    /*
-    this.delegateElements();
-    this.render();
-    this.delegateEvents();
-    */
+    this
+      .setElements({
+        clearCompleted: 'button.clear-completed',
+        footer: 'footer.footer',
+        main: 'section.main',
+        newTodo: 'input.new-todo',
+        todoCount: 'span.todo-count',
+        todoList: 'ul.todo-list',
+        toggleAll: 'input.toggle-all'
+      })
+      .setEvents({
+        clearCompleted: {
+          click: 'clear'
+        },
+        newTodo: {
+          keydown: 'add'
+        },
+        toggleAll: {
+          click: 'toggle'
+        }
+      })
+      .setTemplate(() => {
+        const data = this.collection.todoCollection.getData();
+        const completedCount = this.collection.todoCollection.getData()
+          .reduce((count, todo) => {
+            count += todo.completed;
+            return count;
+          }, 0);
+        const itemsLeft = data.length - completedCount;
 
-    this.setTemplate(() => {
-      const data = this.collection.todoCollection.getData();
-      const completedCount = this.collection.todoCollection.getData()
-        .reduce((count, todo) => {
-          count += todo.completed;
-          return count;
-        }, 0);
-      const itemsLeft = data.length - completedCount;
-
-      return (`
-        <div>
+        return (`
         <header class="header">
           <h1>todos</h1>
           <input class="new-todo" placeholder="What needs to be done?" autofocus>
@@ -82,39 +68,18 @@ class AppView extends BaseView {
             Clear completed
           </button>
         </footer>
-        </div>
       `);
-    });
-
-
-    this.setViews([
-      {
-        ViewClass: TodoView,
-        selector: 'ul.todo-list',
-        model: this.collection.todoCollection
-      }
-    ]);
+      })
+      .setViews([
+        {
+          ViewClass: TodoView,
+          selector: 'ul.todo-list',
+          model: this.collection.todoCollection
+        }
+      ]);
 
     this.render();
-
   }
-  /*
-  render() {
-    const data = this.collection.todoCollection.getData();
-    const completedCount = this.collection.todoCollection.getData()
-      .reduce((count, todo) => {
-        count += todo.completed;
-        return count;
-      }, 0);
-    const itemsLeft = data.length - completedCount;
-
-    this.el.main.hidden = data.length === 0;
-    this.el.footer.hidden = data.length === 0;
-    this.el.clearCompleted.hidden = completedCount === 0;
-    this.el.toggleAll.checked = data.length > 0 && completedCount === data.length;
-    this.el.todoCount.innerHTML = `<strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left`;
-  }
-  */
 
   clear() {
     this.collection.todoCollection.clearСompleted();

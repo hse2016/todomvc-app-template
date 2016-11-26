@@ -6,24 +6,25 @@ const Utils = require('../utils');
 class TodoView extends BaseView {
   constructor(mainElement, collection) {
     super(mainElement, collection);
+    this.listenTo(collection, 'data_changed', () => this.render());
 
-    this.setEvents({
-      'input.toggle': {
-        click: 'complete'
-      },
-      'label': {
-        dblclick: 'edit'
-      },
-      'button.destroy': {
-        click: 'delete'
-      },
-      'input.edit': {
-        keydown: 'updateInput',
-        blur: 'close'
-      }
-    });
-
-    this.setTemplate((id, todo) => `
+    this
+      .setEvents({
+        'input.toggle': {
+          click: 'complete'
+        },
+        'label': {
+          dblclick: 'edit'
+        },
+        'button.destroy': {
+          click: 'delete'
+        },
+        'input.edit': {
+          keydown: 'updateInput',
+          blur: 'close'
+        }
+      })
+      .setTemplate((id, todo) => `
       <li id="todo_${id}" ${todo.completed ? 'class="completed"' : ''}>
         <div class="view">
           <input class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''}="">
@@ -33,8 +34,6 @@ class TodoView extends BaseView {
         <input class="edit" value="${todo.title}">
       </li>
     `);
-
-    this.listenTo(collection, 'data_changed', () => this.render());
 
     this.render();
   }

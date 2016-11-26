@@ -8,7 +8,7 @@
   },
 
   "scripts": {
-    "build-js": "browserify js/main.js > js/result.js",
+    "build-js": "browserify js/main.js -o js/result.js",
     "watch-js": "watchify js/main.js -o js/result.js",
     "cgi-server": "python3 -m http.server --cgi"
   }

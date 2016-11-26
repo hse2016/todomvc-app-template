@@ -17,3 +17,11 @@ module.exports.removeClass = (element, className) => {
       .split(' ').filter(currentClassName => currentClassName !== className).join(' '));
   }
 };
+
+module.exports.htmlToElement = (html) => {
+  html = html.trim().split('').filter(char => char !== '\n').join('');
+
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp;
+};

@@ -1,6 +1,7 @@
 'use strict';
 
 const EventEmitter = require('../event_emitter');
+const Utils = require('../utils');
 
 class BaseView extends EventEmitter {
   constructor(mainElement, collection) {
@@ -11,29 +12,25 @@ class BaseView extends EventEmitter {
 
   setElements(elements) {
     this._elements = elements;
+    return this;
   }
 
   setEvents(events) {
     this._events = events;
+    return this;
   }
 
   setTemplate(template) {
-    this.template = template;
+    this._template = template;
+    return this;
   }
 
   setViews(views) {
     this._views = views;
-
-
-    /*
-    for (let viewName in views) {
-      const [viewClass, mainElement, collection] = views[viewName];
-      this.view[viewName] = new viewClass(mainElement, collection);
-    }
-    */
+    return this;
   }
 
-  delegateViews() {
+  _delegateViews() {
     this.views = [];
     if (this._views !== undefined) {
       this._views.forEach(({ViewClass, selector, model}) => {
@@ -43,7 +40,7 @@ class BaseView extends EventEmitter {
     }
   }
 
-  delegateElements(doc) {
+  _delegateElements(doc) {
     this.el = {};
     if (doc === undefined) {
       for (let element in this._elements) {
@@ -58,7 +55,7 @@ class BaseView extends EventEmitter {
     }
   }
 
-  delegateEvents(doc, id) {
+  _delegateEvents(doc, id) {
     for (let name in this._events) {
       let element;
       if (this.el[name] === undefined) {
@@ -78,14 +75,15 @@ class BaseView extends EventEmitter {
     this.mainElement.innerHTML = '';
 
     this.collection.forEach(item => {
-      const item_tmp = document.createElement('div');
-      item_tmp.innerHTML = this.template(item.id, item).trim();
-      const element = item_tmp.firstChild;
+      const template = this._template(item.id, item);
+      const element = Utils.htmlToElement(template);
 
-      this.delegateElements(element);
-      this.delegateEvents(element, item.id);
-      this.mainElement.appendChild(element);
-      this.delegateViews();
+      this._delegateElements(element);
+      this._delegateEvents(element, item.id);
+      while (element.firstChild) {
+        this.mainElement.appendChild(element.firstChild);
+      }
+      this._delegateViews();
     });
   }
 }
