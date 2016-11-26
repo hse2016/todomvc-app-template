@@ -73,7 +73,6 @@ class BaseView extends EventEmitter {
 
   render() {
     this.mainElement.innerHTML = '';
-
     this.collection.forEach(item => {
       const template = this._template(item.id, item);
       const element = Utils.htmlToElement(template);

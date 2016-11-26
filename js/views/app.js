@@ -40,35 +40,35 @@ class AppView extends BaseView {
         const itemsLeft = data.length - completedCount;
 
         return (`
-        <header class="header">
-          <h1>todos</h1>
-          <input class="new-todo" placeholder="What needs to be done?" autofocus>
-        </header>
-        <section class="main" ${data.length === 0 ? 'hidden' : ''}>
-          <input class="toggle-all" type="checkbox" ${data.length > 0 && completedCount === data.length ? 'checked' : ''}>
-          <label for="toggle-all">Mark all as complete</label>
-          <ul class="todo-list"></ul>
-        </section>
-        <footer class="footer" ${data.length === 0 ? 'hidden' : ''}>
-          <span class="todo-count">
-            <strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left
-          </span>
-          <ul class="filters">
-            <li>
-              <a class="selected" href="#/">All</a>
-            </li>
-            <li>
-              <a href="#/active">Active</a>
-            </li>
-            <li>
-              <a href="#/completed">Completed</a>
-            </li>
-          </ul>
-          <button class="clear-completed" ${completedCount === 0 ? 'hidden' : ''}>
-            Clear completed
-          </button>
-        </footer>
-      `);
+          <header class="header">
+            <h1>todos</h1>
+            <input class="new-todo" placeholder="What needs to be done?" autofocus>
+          </header>
+          <section class="main" ${data.length === 0 ? 'hidden' : ''}>
+            <input class="toggle-all" type="checkbox" ${data.length > 0 && completedCount === data.length ? 'checked' : ''}>
+            <label for="toggle-all">Mark all as complete</label>
+            <ul class="todo-list"></ul>
+          </section>
+          <footer class="footer" ${data.length === 0 ? 'hidden' : ''}>
+            <span class="todo-count">
+              <strong>${itemsLeft}</strong> item${itemsLeft === 1 ? '' : 's'} left
+            </span>
+            <ul class="filters">
+              <li>
+                <a class="selected" href="#/">All</a>
+              </li>
+              <li>
+                <a href="#/active">Active</a>
+              </li>
+              <li>
+                <a href="#/completed">Completed</a>
+              </li>
+            </ul>
+            <button class="clear-completed" ${completedCount === 0 ? 'hidden' : ''}>
+              Clear completed
+            </button>
+          </footer>
+        `);
       })
       .setViews([
         {
