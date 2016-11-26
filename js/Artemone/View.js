@@ -23,16 +23,7 @@ class Views extends Events {
 		for (const i in data) {
 			const type = i.split(' ', 1)[0];
 			const selector = i.slice(type.length, i.length);
-			switch (type) {
-			case 'click':
-				this.onClick(this, this.el, selector, this.dEvents[i]);
-				break;
-			case 'keypress':
-				this.onKeyPress(this, this.el, selector, this.dEvents[i]);
-				break;
-			default:
-				break;
-			}
+			this.onClick(this, this.el, selector, this.dEvents[i], type);
 		}
 	}
 

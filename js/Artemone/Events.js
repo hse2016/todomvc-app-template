@@ -70,13 +70,7 @@ class EventEmitter {
 		}
 	}
 
-	onKeyPress(context, element, selector, handle) {
-		const el = element.querySelector(selector);
-		el.onkeypress = handle.bind(context);
-		return el;
-	}
-
-	onClick(context, element, selector, handle) {
+	onClick(context, element, selector, handle, type) {
 		let el_selector;
 
 		if (element === undefined) {
@@ -88,7 +82,7 @@ class EventEmitter {
 		}
 
 		if (el_selector) {
-			el_selector.addEventListener('click', handle.bind(context));
+			el_selector.addEventListener(type || 'click', handle.bind(context));
 			return el_selector;
 		}
 
