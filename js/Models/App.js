@@ -6,14 +6,11 @@ const Artemone = require('./../Artemone/Artemone');
 
 class App extends Artemone.Models {
 	constructor(attributes) {
-		super();
-		this.set({
+		const defaults = {
 			title: 'todos',
-		});
+		};
 
-		if (attributes !== undefined) {
-			this.set(attributes);
-		}
+		super(defaults, attributes);
 	}
 }
 

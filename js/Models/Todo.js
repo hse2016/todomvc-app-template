@@ -6,15 +6,12 @@ const Artemone = require('./../Artemone/Artemone');
 
 class Todo extends Artemone.Models {
 	constructor(attributes) {
-		super();
-		this.set({
+		const defaults = {
 			title: '',
 			completed: false,
-		});
+		};
 
-		if (attributes) {
-			this.set(attributes);
-		}
+		super(defaults, attributes);
 	}
 
 	setCompleted(completed) {

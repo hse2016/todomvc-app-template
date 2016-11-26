@@ -7,10 +7,18 @@ const Events = require('./Events');
 let modelCount = 0;
 
 class Models extends Events {
-	constructor(attributes) {
+	constructor(defaults, attributes) {
 		super();
+
 		this.attributes = {};
-		this.set(attributes);
+
+		if (defaults) {
+			this.set(defaults);
+		}
+
+		if (attributes) {
+			this.set(attributes);
+		}
 
 		this.id = modelCount++;
 	}

@@ -22,6 +22,7 @@ class ListView extends Artemone.Views {
 			'clearCompletedLink' : '.clear-completed',
 			'list' 				 : '.todo-list',
 			'footer' 			 : '.footer',
+			'newTodo' 			 : '.new-todo',
 		};
 	}
 
@@ -103,8 +104,8 @@ class ListView extends Artemone.Views {
 
 	createOnEnter(e) {
 		if (e.keyCode === 13) {
-			const text = this.el.getElementsByClassName('new-todo')[0].value;
-			this.el.getElementsByClassName('new-todo')[0].value = '';
+			const text = this.ui.newTodo.value;
+			this.ui.newTodo.value = '';
 			const newTodo = new Todo({ 'title': text });
 			this.addOne(newTodo);
 		}
