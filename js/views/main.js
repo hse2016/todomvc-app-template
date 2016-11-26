@@ -10,15 +10,20 @@ class MainView extends BaseView {
 
     this
       .setTemplate(() => `
-        <section id="todoapp_1" class="todoapp"></section>
-        <section id="todoapp_2" class="todoapp"></section>
+        ${this._views.reduce((previous, _, id) => previous +
+          `<section id="todoapp_${id + 1}" class="todoapp"></section>`, '')}
         <footer class="info">
-          <p>Double-click to edit a todo</p>
-          <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
-          <p>Created by <a href="http://todomvc.com">you</a></p>
-          <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+          <p><a class="add-todo-list">Add Another Todo List</a></p>
         </footer>
       `)
+      .setElements({
+        addTodoList: 'a.add-todo-list'
+      })
+      .setEvents({
+        addTodoList: {
+          click: 'add'
+        }
+      })
       .setViews([
         {
           ViewClass: AppView,
@@ -32,6 +37,15 @@ class MainView extends BaseView {
         }
       ])
       .render();
+  }
+
+  add() {
+    this._views.push({
+      ViewClass: AppView,
+      selector: `section#todoapp_${this._views.length + 1}`,
+      model: new AppModel()
+    });
+    this.render();
   }
 }
 

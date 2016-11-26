@@ -76,9 +76,8 @@ class AppView extends BaseView {
           selector: 'ul.todo-list',
           model: this.collection.todoCollection
         }
-      ]);
-
-    this.render();
+      ])
+      .render();
   }
 
   clear() {
