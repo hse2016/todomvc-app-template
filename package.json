@@ -6,9 +6,16 @@
     "watchify": "^3.7.0",
     "browserify": "^13.1.1"
   },
-
   "scripts": {
     "build-js": "browserify js/app.js > js/result.js",
     "watch-js": "watchify js/app.js -o js/result.js"
+  },
+  "devDependencies": {
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1",
+    "git-hooks": "^1.1.7"
   }
 }
