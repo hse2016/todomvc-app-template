@@ -3,8 +3,8 @@
  */
 
 const Artemone = require('./../Artemone/Artemone');
-const TodoView = require('./todo-view');
-const Todo = require('./../Models/todo');
+const TodoView = require('./Todo-view');
+const Todo = require('./../Models/Todo');
 
 class ListView extends Artemone.Views {
 

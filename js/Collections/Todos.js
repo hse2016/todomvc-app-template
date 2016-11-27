@@ -3,7 +3,7 @@
  */
 
 const Artemone = require('./../Artemone/Artemone');
-const Todo = require('./../Models/todo');
+const Todo = require('./../Models/Todo');
 const LocalStorage = require('./../Artemone/LocalStorage');
 
 class Todos extends Artemone.Collection {
