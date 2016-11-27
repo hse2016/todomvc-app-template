@@ -8,6 +8,7 @@
     "webpack": "^1.13.3"
   },
   "scripts": {
+    "start" : "",
     "build-js": "browserify js/app.js > js/result.js",
     "watch-js": "watchify js/app.js -o js/result.js",
     "test": "echo \"Error: I SHOULD FAIL LOLOLOLOLOL \" && exit 1",
