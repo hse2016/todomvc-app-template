@@ -1,8 +1,28 @@
-/*
+.hidden {
+  display: none;
+}
 
-app-template.css overrides
+.todolist {
+  background: #fff;
+}
 
-remove this comment if used
-remove this file if not
+.destroy-todolist {
+  position: absolute;
+  left: 100%;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+}
 
-*/
+.mainlist .add,
+.mainlist .remove {
+  background: #fff;
+  border-radius: 10px;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  width: 50px;
+}
