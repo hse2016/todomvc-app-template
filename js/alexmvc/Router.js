@@ -7,6 +7,6 @@ module.exports = class Router {
 
 	navigateTo(route) {
 		this.actions[route]();
-		this.window.history.pushState(route, "title", "#" + this.routes[route]);
+		this.window.history.pushState(route, 'title', `#${this.routes[route]}`);
 	}
 };

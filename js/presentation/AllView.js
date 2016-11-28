@@ -5,9 +5,9 @@ const View = require('./../alexmvc/View');
 
 module.exports = class AllView extends View {
 	constructor(document, controller) {
-		var views = {
-			counter: window.document.getElementById('todo-count'),
-			edittext: window.document.getElementsByClassName('new-todo')[0],
+		const views = {
+			counter: document.getElementById('todo-count'),
+			edittext: document.getElementsByClassName('new-todo')[0],
 		};
 
 		super(document, controller, views);
@@ -24,8 +24,8 @@ module.exports = class AllView extends View {
 
 	setupListeners(eventBus) {
 		// setup model to view callbacks
-		var self = this;
-		eventBus.addEventHandler('updateCounter', function (value) {
+		const self = this;
+		eventBus.addEventHandler('updateCounter', (value) => {
 			self.counter.innerHTML = value.toString();
 		});
 	}

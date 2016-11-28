@@ -3,10 +3,11 @@ const AllController = require('./presentation/AllController');
 const AllView = require('./presentation/AllView');
 const AllModel = require('./domain/AllModel');
 const TodoAPI = require('./data/TodoAPI');
-(function (window) {
-	let api = new TodoAPI(window.localStorage);
 
-	let router = new Router(window, {
+(function (window) {
+	const api = new TodoAPI(window.localStorage);
+
+	const router = new Router(window, {
 		all: '',
 		completed: 'completed',
 		active: 'active',

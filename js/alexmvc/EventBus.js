@@ -7,19 +7,21 @@ module.exports = class EventBus {
 	}
 
 	addEventHandler(event, handler) {
-		if (this.listenersMap.has(event))
+		if (this.listenersMap.has(event)) {
 			this.listenersMap.get(event).add(handler);
-		else
+		} else {
 			this.listenersMap.set(event, [handler]);
+		}
 	}
 
 	sendEvent(event, data) {
-		if (!this.listenersMap.has(event))
+		if (!this.listenersMap.has(event)) {
 			return;
+		}
 
 
-		var listeners = this.listenersMap.get(event);
-		for (let key in listeners) {
+		const listeners = this.listenersMap.get(event);
+		for (const key in listeners) {
 			listeners[key](data);
 		}
 	}
