@@ -1,9 +1,14 @@
 /**
  * Created by dalexiv on 11/21/16.
  */
-const Model = require("./alexmvc/Model");
+const Model = require("./../alexmvc/Model");
+const Todo = require('./../data/Todo');
 
-module.exports = class AllModel extends Model {
+module.exports = class AppModel extends Model {
+	constructor(api) {
+		super(api);
+		api.addTodo(new Todo("hey, bitmaker!", true));
+	}
 
 	bindView(view) {
 		super.bindView(view);
@@ -16,5 +21,6 @@ module.exports = class AllModel extends Model {
 
 		++this.counter;
 		this.eventBus.sendEvent('updateCounter', this.counter);
+		console.log(this.api.getAllTodos());
 	}
 };

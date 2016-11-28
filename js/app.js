@@ -1,27 +1,27 @@
 const Router = require('./alexmvc/Router');
-const AllController = require('./AllController');
-const AllView = require('./AllView');
-const AllModel = require('./AllModel');
+const AllController = require('./presentation/AllController');
+const AllView = require('./presentation/AllView');
+const AllModel = require('./domain/AllModel');
+const TodoAPI = require('./data/TodoAPI');
 (function (window) {
-  const router = new Router(window, {
-    all: '',
-    completed: 'completed',
-    active: 'active',
-  }, {
-    all() {
-      const model = new AllModel(null);
-      const controller = new AllController(router, model);
+	let api = new TodoAPI(window.localStorage);
 
-      const view = new AllView(window.document, controller, {
-        counter: window.document.getElementById('todo-count'),
-        edittext: window.document.getElementsByClassName('new-todo')[0],
-      });
+	let router = new Router(window, {
+		all: '',
+		completed: 'completed',
+		active: 'active',
+	}, {
+		all() {
+			const model = new AllModel(api);
+			const controller = new AllController(router, model);
 
-      model.bindView(view);
-      controller.openPage();
-    },
-  });
+			const view = new AllView(window.document, controller);
 
-  router.navigateTo('all');
+			model.bindView(view);
+			controller.openPage();
+		},
+	});
+
+	router.navigateTo('all');
 }(window));
 
