@@ -7,7 +7,6 @@ const Todo = require('./../data/Todo');
 module.exports = class AppModel extends Model {
 	constructor(api) {
 		super(api);
-		api.addTodo(new Todo('hey, bitmaker!', true));
 	}
 
 	bindView(view) {
@@ -20,6 +19,7 @@ module.exports = class AppModel extends Model {
 
 		++this.counter;
 		this.eventBus.sendEvent('updateCounter', this.counter);
+		this.api.addTodo(new Todo(text, false));
 		console.log(this.api.getAllTodos());
 	}
 };

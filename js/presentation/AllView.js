@@ -15,8 +15,7 @@ module.exports = class AllView extends View {
 
 		this.edittext.addEventListener('keypress', function (event) {
 			const key = event.which || event.keyCode;
-			if (key == 13) {
-				console.log(this);
+			if (key === 13) {
 				controller.onEditTextSubmitted(this.value);
 			}
 		});

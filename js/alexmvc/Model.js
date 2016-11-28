@@ -9,6 +9,7 @@ module.exports = class Model {
 	}
 
 	bindView(view) {
-		view.setupListeners(new EventBus());
+		this.eventBus = new EventBus();
+		view.setupListeners(this.eventBus);
 	}
 };

@@ -10,12 +10,12 @@ module.exports = class TodoAPI {
 
 		this.storageKey = 'data';
 		if (this.provider.getItem(this.storageKey) == null) {
-			this.provider.setItem(this.storageKey, JSON.stringify(new TodoList(null)));
+			this.saveData(this.storageKey, new TodoList(null));
 		}
 	}
 
 	addTodo(todo) {
-		this.updateDB((list) => { list.add(todo); });
+		this.updateDB((list) => { list.push(todo); });
 	}
 
 	getAllTodos() {
@@ -23,18 +23,23 @@ module.exports = class TodoAPI {
 	}
 
 	readFromDB(func) {
-		const list = this.getData(this.storageKey);
+		const list = this.getList(this.storageKey);
 		return func(list);
 	}
 
 	updateDB(func) {
-		const list = this.getData(this.storageKey);
+		const list = this.getList(this.storageKey);
+		console.log(list);
 		func(list);
 		this.saveData(this.storageKey, list);
 	}
 
 	saveData(key, list) {
 		this.provider.setItem(key, JSON.stringify(list));
+	}
+
+	getList(key) {
+		return TodoList.revive(this.getData(key));
 	}
 
 	getData(key) {
