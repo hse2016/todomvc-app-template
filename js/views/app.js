@@ -45,7 +45,9 @@ class AppView extends BaseView {
             <input class="new-todo" placeholder="What needs to be done?" autofocus>
           </header>
           <section class="main" ${data.length === 0 ? 'hidden' : ''}>
-            <input class="toggle-all" type="checkbox" ${data.length > 0 && completedCount === data.length ? 'checked' : ''}>
+            <input class="toggle-all"
+                   type="checkbox"
+                   ${data.length > 0 && completedCount === data.length ? 'checked' : ''}>
             <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list"></ul>
           </section>

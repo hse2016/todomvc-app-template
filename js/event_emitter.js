@@ -28,7 +28,7 @@ class EventEmitter {
   //unsubscribe from event
   off(eventName, handler) {
     if (typeof this.listeners[eventName] !== 'undefined') {
-      this.listeners[eventName] = this.listeners[eventName].filter(listen => handler != listen);
+      this.listeners[eventName] = this.listeners[eventName].filter(listen => handler !== listen);
     }
   }
   //remove all subscribers
@@ -57,7 +57,8 @@ class EventEmitter {
   unlistenFrom(observable, eventName) {
     observable.off(eventName, this.observables[eventName].handler);
     if (typeof this.observables[eventName] !== 'undefined') {
-      this.observables[eventName] = this.observables[eventName].filter(obs => obs.observable !== observable);
+      this.observables[eventName] =
+        this.observables[eventName].filter(obs => obs.observable !== observable);
     }
   }
 

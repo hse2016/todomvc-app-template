@@ -33,9 +33,8 @@ class TodoView extends BaseView {
         </div>
         <input class="edit" value="${todo.title}">
       </li>
-    `);
-
-    this.render();
+    `)
+      .render();
   }
 
   complete(id) {
@@ -45,18 +44,18 @@ class TodoView extends BaseView {
   edit(id, element) {
     const parent = element.parentElement.parentElement;
     Utils.addClass(parent, 'editing');
-    const todo_input = parent.querySelector('input.edit');
-    todo_input.focus();
-    todo_input.selectionStart = todo_input.value.length;
+    const todoInput = parent.querySelector('input.edit');
+    todoInput.focus();
+    todoInput.selectionStart = todoInput.value.length;
   }
 
   updateInput(id, element, event) {
     const parent = element.parentElement;
-    const todo_input = parent.querySelector('input.edit');
+    const todoInput = parent.querySelector('input.edit');
     if (event.keyCode === 13) {
-      this.collection.edit(id, todo_input.value.trim());
+      this.collection.edit(id, todoInput.value.trim());
     } else if (event.keyCode === 27) {
-      todo_input.blur();
+      todoInput.blur();
     }
   }
 
