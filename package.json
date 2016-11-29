@@ -6,9 +6,13 @@
     "watchify": "^3.7.0",
     "browserify": "^13.1.1"
   },
-
   "scripts": {
-    "build-js": "browserify js/app.js > js/result.js",
-    "watch-js": "watchify js/app.js -o js/result.js"
-  }
+    "build-js": "browserify js/main.js -o js/result.js",
+    "watch-js": "watchify js/main.js -o js/result.js",
+    "cgi-server": "python3 -m http.server --cgi",
+    "lint": "jshint ."
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }

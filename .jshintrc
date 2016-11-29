@@ -1,0 +1,20 @@
+{
+  "browser": true,
+  "browserify": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "esversion": 6,
+  "freeze": true,
+  "indent": 2,
+  "jquery": true,
+  "latedef": true,
+  "maxlen": 100,
+  "newcap": true,
+  "node": true,
+  "quotmark": "single",
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "varstmt": true
+}
