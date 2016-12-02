@@ -1,0 +1,9 @@
+var event-emitter = require('./event-emitter.js');S
+class model extends event-emitter {
+    constructor(options) {
+        this.options = options || {};
+        this.data = options.data || {};
+        
+    }   
+    
+}
