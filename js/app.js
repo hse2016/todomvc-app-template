@@ -12,7 +12,6 @@
 	lists.setName('lists');
 	appView.attach('.lists').setModel(lists);
 
-
 	appView.model.load().then((result) => {
 			result.loadTodos();
 		},

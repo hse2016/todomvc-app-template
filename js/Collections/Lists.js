@@ -53,8 +53,8 @@ class Lists extends Artemone.Collection {
 
 			listView.model.load().then(() => {
 				console.log('ok');
-			}).catch(() => {
-				console.log('not ok');
+			}).catch((e) => {
+				console.log('not ok: ' + e);
 			});
 		}
 	}

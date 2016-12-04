@@ -3,6 +3,7 @@
  */
 
 const Artemone = require('./../Artemone/Artemone');
+const CommentsListView = require('./../Views/CommentList-view');
 
 class TodoView extends Artemone.Views {
 
@@ -14,6 +15,11 @@ class TodoView extends Artemone.Views {
 			'click .toggle ': this.toggleCompleted,
 			'click .toggle': this.toggleVisible,
 			'click .destroy': this.destroy,
+			'keypress .new-comment': this.addComment,
+		};
+
+		this.dUI = {
+			'comments' 		 : '.comments-wrapper',
 		};
 	}
 
@@ -21,19 +27,25 @@ class TodoView extends Artemone.Views {
 		if (this.model) {
 			this.listenTo(this.model, 'visible', this.toggleVisible, this);
 			this.listenTo(this.model, 'change', this.render, this);
+			this.listenTo(this.model.comments, 'loaded', this.render, this);
+
+			this.comments = new CommentsListView();
+			this.comments.setModel(this.model.comments).render();
 		}
 	}
 
 	events() {
 		this.delegateEvents();
+		this.setUI();
 	}
-
 
 	render() {
 		this.el.innerHTML = this.template(this.model.attributes);
 		this.checkCompleted();
 		this.toggleVisible();
 		this.events();
+
+		this.ui.comments.appendChild(this.comments.el);
 		return this;
 	}
 

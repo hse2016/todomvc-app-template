@@ -3,15 +3,28 @@
  */
 
 const Artemone = require('./../Artemone/Artemone');
+const CommentsList = require('./../Collections/Comments');
 
 class Todo extends Artemone.Models {
 	constructor(attributes) {
 		const defaults = {
 			title: '',
 			completed: false,
+			comments: '',
 		};
 
 		super(defaults, attributes);
+
+		this.comments = new CommentsList();
+
+		if (this.get('comments')) {
+			this.comments.setName(this.get('comments'));
+			this.comments.load().then(() => {
+					// console.log(res)
+				});
+		} else {
+			this.set({ 'comments' : this.comments.name });
+		}
 	}
 
 	setCompleted(completed) {

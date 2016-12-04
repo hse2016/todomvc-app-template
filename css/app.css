@@ -7,14 +7,14 @@ remove this file if not
 
 */
 
-@keyframes example {
-	from {
-		transform: translateX(-1400px);
-	}
-	to {
-		transform: translateX(0px);
-	}
-}
+/*@keyframes example {*/
+	/*from {*/
+		/*transform: translateX(-1400px);*/
+	/*}*/
+	/*to {*/
+		/*transform: translateX(0px);*/
+	/*}*/
+/*}*/
 
 .add-list {
 	display: block;
@@ -73,3 +73,39 @@ remove this file if not
 	top: -120px;
 	font-size: 70px;
 }
+
+
+.comments-wrapper {
+	padding-left: 80px;
+	padding-right: 55px;
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
+
+.new-comment {
+	width: 100%;
+	height: 20px;
+	border: 1px solid #eee0e0;
+	border-radius: 4px;
+
+	font-size: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #6c6c6c;
+}
+
+ul.comments {
+	padding-left: 0px;
+	list-style-type: none;
+	padding-bottom: 10px;
+}
+
+.comments-wrapper .comments li {
+	border: none;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+

@@ -4,6 +4,7 @@
 
 const Events = require('./Events');
 const Model = require('./Model');
+const guid = require('./GUID');
 
 class Collection extends Events {
 
@@ -13,6 +14,8 @@ class Collection extends Events {
 		this.model = Model;
 		this.models = [];
 		this.storage = undefined;
+
+		this.name = guid();
 	}
 
 	add(model) {
@@ -116,6 +119,7 @@ class Collection extends Events {
 				this.add(item);
 			}
 
+			this.emit('loaded');
 			resolve(this);
 		});
 

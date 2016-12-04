@@ -68,11 +68,25 @@
 	</section>
 </script>
 
+<script type="text/template" id="comment-template">
+	<%- title %>
+</script>
+
+<script type="text/template" id="comments-list-template">
+	<ul class="comments">
+
+	</ul>
+	<input class="new-comment" value="" placeholder="comment">
+</script>
+
 <script id="template-todo" type="text/x-template">
-	<div class="view">
+	<div class="view" style="position: relative;">
 		<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
 		<label><%- title %></label>
 		<button class="destroy"></button>
+	</div>
+	<div class="comments-wrapper">
+
 	</div>
 	<input class="edit" value="<%- title %>">
 </script>

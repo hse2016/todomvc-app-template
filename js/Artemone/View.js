@@ -55,7 +55,7 @@ class Views extends Events {
 	}
 
 	remove() {
-		// this.el.outerHTML = '';
+		this.el.outerHTML = '';
 		return this;
 	}
 
