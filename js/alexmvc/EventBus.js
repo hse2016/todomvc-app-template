@@ -1,6 +1,3 @@
-/**
- * Created by dalexiv on 11/22/16.
- */
 module.exports = class EventBus {
 	constructor() {
 		this.listenersMap = new Map();

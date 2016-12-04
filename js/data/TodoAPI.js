@@ -1,6 +1,3 @@
-/**
- * Created by User on 28/11/16.
- */
 const TodoList = require('./../data/TodoList');
 
 module.exports = class TodoAPI {

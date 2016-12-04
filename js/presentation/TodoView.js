@@ -1,3 +1,1 @@
-/**
- * Created by dalexiv on 12/4/16.
- */
+const View = require('./../alexmvc/View');

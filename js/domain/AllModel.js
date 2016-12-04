@@ -1,6 +1,3 @@
-/**
- * Created by dalexiv on 11/21/16.
- */
 const Model = require('./../alexmvc/Model');
 const Todo = require('./../data/Todo');
 
