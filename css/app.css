@@ -7,14 +7,14 @@ remove this file if not
 
 */
 
-/*@keyframes example {*/
-	/*from {*/
-		/*transform: translateX(-1400px);*/
-	/*}*/
-	/*to {*/
-		/*transform: translateX(0px);*/
-	/*}*/
-/*}*/
+@keyframes example {
+	from {
+		transform: translateX(-1400px);
+	}
+	to {
+		transform: translateX(0px);
+	}
+}
 
 .add-list {
 	display: block;
