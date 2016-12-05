@@ -11,13 +11,13 @@ class CommentsView extends Artemone.Views {
 	constructor() {
 		super('div', '', '');
 
-		this.dEvents = {
-			'keypress .new-comment': this.createOnEnter,
-		};
-
 		this.dUI = {
 			'comments' 		 : '.comments',
 			'newComment' 	 : '.new-comment',
+		};
+
+		this.dEvents = {
+			'keypress .new-comment': this.createOnEnter,
 		};
 	}
 
@@ -46,6 +46,7 @@ class CommentsView extends Artemone.Views {
 	renderModel(name, model) {
 		const commentView = new CommentView();
 		commentView.setModel(model);
+		this.ui.comments.parentElement.classList.add('animated');
 		this.ui.comments.appendChild(commentView.render().el);
 	}
 
@@ -68,7 +69,6 @@ class CommentsView extends Artemone.Views {
 			this.addOne(c);
 		}
 	}
-
 
 	destroy() {
 		this.model.destroy(this.id);

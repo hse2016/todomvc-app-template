@@ -9,6 +9,11 @@ class CommentView extends Artemone.Views {
 	constructor() {
 		super('li');
 		this.setTemplate('#comment-template');
+
+		this.dEvents = {
+			'click .delete-comment': this.destroy,
+		};
+
 	}
 
 	initialize() {
@@ -21,13 +26,11 @@ class CommentView extends Artemone.Views {
 		this.delegateEvents();
 	}
 
-
 	render() {
 		this.el.innerHTML = this.template(this.model.attributes);
-		// this.events();
+		this.events();
 		return this;
 	}
-
 
 	destroy() {
 		this.model.destroy();

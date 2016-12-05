@@ -22,7 +22,8 @@
 	"no-sequences" : 0,
 	"no-cond-assign" : 0,
 	"prefer-template" : 0,
-	"prefer-arrow-callback" : 0
+	"prefer-arrow-callback" : 0,
+	"padded-blocks" : 0
 
   }
 

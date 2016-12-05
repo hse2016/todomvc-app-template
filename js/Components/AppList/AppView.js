@@ -13,7 +13,7 @@ class AppView extends Artemone.Views {
 		this.setTemplate('#todoapp');
 		this.listenTo(this.model, 'add', this.render, this);
 		this.listenTo(this.model, 'loaded', this.loadTodos, this);
-		this.listenTo(this.model, 'loading-error', this.loadTodos, this);
+		this.listenTo(this.model, 'loading-error', this.initTodo, this);
 	}
 
 	render(e, model) {

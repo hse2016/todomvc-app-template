@@ -21,7 +21,6 @@ class AppCollection extends Artemone.Collection {
 	initialize() {
 		this.listenTo(this, 'change', this.save, this);
 		this.listenTo(this, 'add', this.setUniqueID, this);
-		// this.listenTo(this, 'add', this.loadTodo, this);
 		this.model = App;
 	}
 
@@ -51,11 +50,7 @@ class AppCollection extends Artemone.Collection {
 			this.listenTo(listView.model, 'destroy', this.delete, this);
 			this.listenTo(this, 'add', listView.events, listView);
 
-			listView.model.load().then(() => {
-				console.log('ok');
-			}).catch((e) => {
-				console.log('not ok: ' + e);
-			});
+			listView.model.load();
 		}
 	}
 

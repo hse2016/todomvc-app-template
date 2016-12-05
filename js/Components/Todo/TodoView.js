@@ -40,6 +40,12 @@ class TodoView extends Artemone.Views {
 	}
 
 	render() {
+		if (this.el.innerHTML) {
+			this.comments.el.classList.remove('animated');
+		} else {
+			this.comments.el.classList.add('animated');
+		}
+
 		this.el.innerHTML = this.template(this.model.attributes);
 		this.checkCompleted();
 		this.toggleVisible();

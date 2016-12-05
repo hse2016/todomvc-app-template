@@ -29,6 +29,7 @@ remove this file if not
 
 @keyframes add-comment {
 	0% {
+		background-color: #ffecec;
 		opacity: 0;
 		transform: translateX(300px);
 	}
@@ -39,6 +40,7 @@ remove this file if not
 	}
 
 	100% {
+		background-color: #ffffff;
 		opacity: 1;
 		transform: translateX(0);
 	}
@@ -73,7 +75,7 @@ remove this file if not
 	animation-duration: 1s;
 }
 
-.comments > li {
+.animated .comments > li {
 	animation-name: add-comment;
 	animation-duration: 1s;
 }
@@ -106,6 +108,24 @@ remove this file if not
 .delete-list:after {
 	content: '×';
 }
+
+.delete-comment {
+	float: right;
+	text-decoration: none;
+	color: #cc9a9a;
+	font-size: 16px;
+}
+
+.delete-comment:hover {
+	color: #d50802;
+	cursor: pointer;
+}
+
+.delete-comment:after {
+	content: '×';
+}
+
+
 
 .todoapp h1 {
 	top: -120px;
@@ -141,9 +161,18 @@ ul.comments {
 }
 
 .comments-wrapper .comments li {
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
 	border: none;
 	margin-bottom: 10px;
 	font-size: 20px;
+	border-radius: 5px;
+}
+
+.comments-wrapper .comments li:hover {
+	cursor: pointer;
+	background-color: #ffecec;
 }
 
 
