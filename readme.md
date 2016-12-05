@@ -1,24 +1,53 @@
-# TodoMVC App Template
+# Framework Name • [TodoMVC](http://todomvc.com)
 
-> Template used for creating [TodoMVC](http://todomvc.com) apps
-
-![](https://github.com/tastejs/todomvc-app-css/raw/master/screenshot.png)
+> Official description of the framework (from its website)
 
 
-## Getting started
+## QUICK START
 
-- Read the [Application Specification](https://github.com/tastejs/todomvc/blob/master/app-spec.md) before touching the template.
+1. Clone repository to your computer
+2. run `npm i` in root folder
+3. run `npm run build-js` in root folder
+4. Open index.html in browser
 
-- Delete this file and rename `app-readme.md` to `readme.md` and fill it out.
+## Resources
 
-- Clone this repo and install the dependencies with [npm](https://npmjs.com) by running: `npm install`.
+- [Website]()
+- [Documentation]()
+- [Used by]()
+- [Blog]()
+- [FAQ]()
+
+### Articles
+
+- [Interesting article]()
+
+### Support
+
+- [Stack Overflow](http://stackoverflow.com/questions/tagged/__)
+- [Google Groups]()
+- [Twitter](http://twitter.com/__)
+- [Google+]()
+
+*Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
 
 
-## License
+## Implementation
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sindresorhus.com" property="cc:attributionName" rel="cc:attributionURL">TasteJS</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.
+My framework is Artemone (like other popular framework).
 
-## Usage (build js)
+Artemone - main class of framework
 
-`npm run build-js` (just build js file)
-`npm run watch-js` (start watching your js file)
+Model - models to collect data <br />
+Collection - collection of models <br />
+View - representation of data <br />
+Router - routing in app <br />
+Events - event emitrer <br />
+LocalStorage - adapter for native localStorage <br />
+
+Остальная информация будет позже... <br />
+Нет времени сейчас дописывать.
+
+## Credit
+
+Created by [Your Name](http://your-website.com)
