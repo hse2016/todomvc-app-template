@@ -1,7 +1,7 @@
 const Router = require('./alexmvc/Router');
-const AllController = require('./presentation/AllController');
-const AllView = require('./presentation/AllView');
-const AllModel = require('./domain/AllModel');
+const AppController = require('./presentation/AppController');
+const AppView = require('./presentation/AppView');
+const AppModel = require('./domain/AppModel');
 const TodoAPI = require('./data/TodoAPI');
 
 (function (window) {
@@ -13,10 +13,10 @@ const TodoAPI = require('./data/TodoAPI');
 		active: 'active',
 	}, {
 		all() {
-			const model = new AllModel(api);
-			const controller = new AllController(router, model);
+			const model = new AppModel(api);
+			const controller = new AppController(router, model);
 
-			const view = new AllView(window.document, controller);
+			const view = new AppView(window.document, controller);
 
 			model.bindView(view);
 			controller.openPage();
