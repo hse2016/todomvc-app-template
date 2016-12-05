@@ -2,13 +2,13 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const App = require('./../Models/App');
-const LocalStorage = require('./../Artemone/LocalStorage');
-const Todos = require('./../Collections/Todos');
-const ListView = require('./../Views/List-view');
+const Artemone = require('./../../Artemone/Artemone');
+const App = require('./App');
+const LocalStorage = require('./../../Artemone/LocalStorage');
+const Todos = require('./../TodoList/Todos');
+const ListView = require('./../TodoList/ListView');
 
-class Lists extends Artemone.Collection {
+class AppCollection extends Artemone.Collection {
 
 	constructor() {
 		super();
@@ -68,4 +68,4 @@ class Lists extends Artemone.Collection {
 	}
 }
 
-module.exports = Lists;
+module.exports = AppCollection;

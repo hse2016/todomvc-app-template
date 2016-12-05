@@ -2,9 +2,9 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const Todo = require('./../Models/Todo');
-const LocalStorage = require('./../Artemone/LocalStorage');
+const Artemone = require('./../../Artemone/Artemone');
+const Todo = require('./../Todo/Todo');
+const LocalStorage = require('./../../Artemone/LocalStorage');
 
 class Todos extends Artemone.Collection {
 

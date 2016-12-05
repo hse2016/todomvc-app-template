@@ -2,11 +2,11 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const CommentView = require('./Comment-view');
-const Comment = require('./../Models/Comment');
+const Artemone = require('./../../Artemone/Artemone');
+const CommentView = require('./../Comment/CommentView');
+const Comment = require('./../Comment/Comment');
 
-class CommentListView extends Artemone.Views {
+class CommentsView extends Artemone.Views {
 
 	constructor() {
 		super('div', '', '');
@@ -77,4 +77,4 @@ class CommentListView extends Artemone.Views {
 	}
 }
 
-module.exports = CommentListView;
+module.exports = CommentsView;

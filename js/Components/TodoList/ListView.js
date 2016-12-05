@@ -2,9 +2,9 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const TodoView = require('./Todo-view');
-const Todo = require('./../Models/Todo');
+const Artemone = require('./../../Artemone/Artemone');
+const TodoView = require('./../Todo/TodoView');
+const Todo = require('./../Todo/Todo');
 
 class ListView extends Artemone.Views {
 

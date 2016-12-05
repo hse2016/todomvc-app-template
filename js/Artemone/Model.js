@@ -3,6 +3,7 @@
  */
 
 const Events = require('./Events');
+const guid = require('./GUID');
 
 let modelCount = 0;
 
@@ -21,6 +22,7 @@ class Models extends Events {
 		}
 
 		this.id = modelCount++;
+		this.name = guid();
 	}
 
 	set(attributes) {

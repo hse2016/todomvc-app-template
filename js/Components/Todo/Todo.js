@@ -2,8 +2,8 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const CommentsList = require('./../Collections/Comments');
+const Artemone = require('./../../Artemone/Artemone');
+const CommentsList = require('./../Comments/Comments');
 
 class Todo extends Artemone.Models {
 	constructor(attributes) {

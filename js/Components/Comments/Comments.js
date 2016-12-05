@@ -2,9 +2,9 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const Comment = require('./../Models/Comment');
-const LocalStorage = require('./../Artemone/LocalStorage');
+const Artemone = require('./../../Artemone/Artemone');
+const Comment = require('./../Comment/Comment');
+const LocalStorage = require('./../../Artemone/LocalStorage');
 
 class Comments extends Artemone.Collection {
 

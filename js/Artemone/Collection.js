@@ -109,6 +109,7 @@ class Collection extends Events {
 	load() {
 		const promise = new Promise((resolve, reject) => {
 			if (this.storage === undefined) {
+				this.emit('loading-error', "Can't find collection in datastore");
 				reject("Can't find collection in datastore");
 			}
 
@@ -119,7 +120,7 @@ class Collection extends Events {
 				this.add(item);
 			}
 
-			this.emit('loaded');
+			this.emit('loaded', this);
 			resolve(this);
 		});
 

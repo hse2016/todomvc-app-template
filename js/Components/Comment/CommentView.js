@@ -2,7 +2,7 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
+const Artemone = require('./../../Artemone/Artemone');
 
 class CommentView extends Artemone.Views {
 

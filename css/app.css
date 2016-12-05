@@ -16,6 +16,34 @@ remove this file if not
 	}
 }
 
+@keyframes todo {
+	from {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes add-comment {
+	0% {
+		opacity: 0;
+		transform: translateX(300px);
+	}
+
+	70% {
+		opacity: 1;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
 .add-list {
 	display: block;
 	width: 100%;
@@ -37,7 +65,17 @@ remove this file if not
 
 .todoapp {
 	animation-name: example;
-	animation-duration: 3s;
+	animation-duration: 1s;
+}
+
+.todo-list > li {
+	animation-name: todo;
+	animation-duration: 1s;
+}
+
+.comments > li {
+	animation-name: add-comment;
+	animation-duration: 1s;
 }
 
 .delete-list {

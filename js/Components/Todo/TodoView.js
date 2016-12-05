@@ -2,8 +2,8 @@
  * Created by tema on 11.11.16.
  */
 
-const Artemone = require('./../Artemone/Artemone');
-const CommentsListView = require('./../Views/CommentList-view');
+const Artemone = require('./../../Artemone/Artemone');
+const CommentsListView = require('./../Comments/CommentsView');
 
 class TodoView extends Artemone.Views {
 
