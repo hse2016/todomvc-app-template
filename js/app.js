@@ -1,7 +1,28 @@
+const Router = require('./alexmvc/Router');
+const AppController = require('./presentation/AppController');
+const AppView = require('./presentation/AppView');
+const AppModel = require('./domain/AppModel');
+const TodoAPI = require('./data/TodoAPI');
+
 (function (window) {
-	'use strict';
+	const api = new TodoAPI(window.localStorage);
 
-	// Your starting point. Enjoy the ride!
-	// Write npm run watch-js to start coding
+	const router = new Router(window, {
+		all: '',
+		completed: 'completed',
+		active: 'active',
+	}, {
+		all() {
+			const model = new AppModel(api);
+			const controller = new AppController(router, model);
 
-})(window);
+			const view = new AppView(window.document, controller);
+
+			model.bindView(view);
+			controller.openPage();
+		},
+	});
+
+	router.navigateTo('all');
+}(window));
+
