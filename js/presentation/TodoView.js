@@ -38,12 +38,18 @@ class TodoView extends View {
 
 		// Notify controller
 		this.button.addEventListener("click", () => controller.onDeleteButtonClicked());
+		this.toggle.addEventListener("click", () => controller.onToggleChanged())
 	}
 
 	setupListeners(eventBus) {
+		let self = this;
 		eventBus.addEventHandler('wasDeleted', nothing => {
-			this.parent.getChildsContainer().removeChild(this.html);
+			self.parent.getChildsContainer().removeChild(this.html);
 		});
+		eventBus.addEventHandler('stateChanged', state => {
+			// this.toggle. to-do change toggle
+		});
+
 	}
 }
 

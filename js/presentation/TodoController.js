@@ -7,6 +7,10 @@ class TodoController extends Controller {
 		this.model.deleteItself();
 	}
 
+	onToggleChanged() {
+		this.model.changeState();
+	}
+
 	openPage() {
 		super.openPage();
 	}

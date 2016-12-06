@@ -18,7 +18,11 @@ module.exports = class TodoList {
 		return list;
 	}
 
-	todos() {
+	setTodos(list) {
+		this.list = list;
+	}
+
+	getTodos() {
 		return this.list;
 	}
 
