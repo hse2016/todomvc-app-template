@@ -47,7 +47,7 @@ class TodoView extends View {
 			self.parent.getChildsContainer().removeChild(this.html);
 		});
 		eventBus.addEventHandler('stateChanged', state => {
-			// this.toggle. to-do change toggle
+			self.html.className = (state) ? "completed" : "";
 		});
 
 	}
