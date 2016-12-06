@@ -1,10 +1,15 @@
 const Model = require('./../alexmvc/Model');
 
 class TodoModel extends Model {
-	constructor(api, taskText, state) {
+	constructor(api, todo) {
 		super(api);
-		this.taskText = taskText;
-		this.isChecked = state;
+		this.todo = todo;
+	}
+
+	deleteItself() {
+		this.api.removeTodo(this.todo.id);
+
+		this.eventBus.sendEvent('wasDeleted', undefined);
 	}
 }
 

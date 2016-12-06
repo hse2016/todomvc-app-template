@@ -2,14 +2,14 @@ const View = require('./../alexmvc/View');
 const TodoController = require('./TodoController');
 const TodoView = require('./TodoView');
 
-module.exports = class AppView extends View {
-	constructor(document, controller) {
+class AppView extends View {
+	constructor(parent, controller) {
 		const views = {
-			counter: document.getElementById('todo-count'),
-			edittext: document.getElementsByClassName('new-todo')[0],
-			container: document.getElementsByClassName('todo-list')[0],
+			counter: parent.getElementById('todo-count'),
+			edittext: parent.getElementsByClassName('new-todo')[0],
+			container: parent.getElementsByClassName('todo-list')[0],
 		};
-		super(document, controller, views);
+		super(parent, controller, views);
 		super.setChildsContainer(this.container);
 
 		this.edittext.addEventListener('keypress', function (event) {
@@ -27,9 +27,12 @@ module.exports = class AppView extends View {
 			self.counter.innerHTML = value.toString();
 		});
 
-		eventBus.addEventHandler('newTaskCreated', (task) => {
-			let controller = new TodoController(null, task);
-			new TodoView(self, controller);
+		eventBus.addEventHandler('newTaskCreated', (taskModel) => {
+			let controller = new TodoController(null, taskModel);
+			let view = new TodoView(self, controller);
+			taskModel.bindView(view);
 		});
 	}
 };
+
+module.exports = AppView;

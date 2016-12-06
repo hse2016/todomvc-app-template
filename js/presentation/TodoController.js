@@ -3,6 +3,10 @@
  */
 const Controller = require('./../alexmvc/Controller');
 class TodoController extends Controller {
+	onDeleteButtonClicked() {
+		this.model.deleteItself();
+	}
+
 	openPage() {
 		super.openPage();
 	}

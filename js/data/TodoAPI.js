@@ -15,6 +15,12 @@ module.exports = class TodoAPI {
 		this.updateDB((list) => { list.push(todo); });
 	}
 
+	removeTodo(id) {
+		this.updateDB((list) => {
+			return list.todos().filter(item => item.id !== id);
+		})
+	}
+
 	getAllTodos() {
 		return this.readFromDB(list => list);
 	}
@@ -41,5 +47,9 @@ module.exports = class TodoAPI {
 
 	getData(key) {
 		return JSON.parse(this.provider.getItem(key));
+	}
+
+	getUniqueId() {
+		return this.getAllTodos().size();
 	}
 };

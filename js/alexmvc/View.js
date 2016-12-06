@@ -1,6 +1,6 @@
 module.exports = class View {
-	constructor(document, controller, views) {
-		this.document = document;
+	constructor(parent, controller, views) {
+		this.parent = parent;
 		this.controller = controller;
 
 		if (views !== undefined) {

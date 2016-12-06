@@ -1,9 +1,10 @@
 module.exports = class Todo {
-	constructor(taskText, isDone) {
+	constructor(id, taskText, isDone) {
+		this.id = id;
 		this.taskText = taskText;
 		this.isDone = isDone;
 	}
 	static revive(json) {
-		return new Todo(json.taskText, json.isDone);
+		return new Todo(json.id, json.taskText, json.isDone);
 	}
 };

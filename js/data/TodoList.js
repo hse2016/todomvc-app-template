@@ -9,11 +9,20 @@ module.exports = class TodoList {
 	push(todo) {
 		this.list.push(todo);
 	}
+
 	static revive(json) {
 		const list = new TodoList(json.type);
 		for (const i in json.list) {
 			list.push(Todo.revive(json.list[i]));
 		}
 		return list;
+	}
+
+	todos() {
+		return this.list;
+	}
+
+	size() {
+		return this.list.length;
 	}
 };

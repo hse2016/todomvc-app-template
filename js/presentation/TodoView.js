@@ -4,8 +4,8 @@ class TodoView extends View {
 		TodoView.template = todomodel => {
 			return super.html`<div class="view">
                                 <input class="toggle" type="checkbox"
-									${(todomodel.isChecked) ? "checked=true" : ""}>
-                                <label class="text">${todomodel.taskText}</label>
+									${(todomodel.todo.isDone) ? "checked=true" : ""}>
+                                <label class="text">${todomodel.todo.taskText}</label>
                                 <button class="destroy"></button>
                             </div>
                             <input class="edit" value="Create a TodoMVC template">`;
@@ -16,7 +16,7 @@ class TodoView extends View {
 			let view = document.createElement("LI");
 			view.innerHTML = html;
 
-			if (todomodel.isChecked)
+			if (todomodel.todo.isDone)
 				view.className = "completed";
 
 			return view;
@@ -26,6 +26,7 @@ class TodoView extends View {
 		let view = TodoView.buildView(this.controller.model);
 
 		const views = {
+			html: view,
 			toggle: view.getElementsByClassName("toggle")[0],
 			text: view.getElementsByClassName("text")[0],
 			button: view.getElementsByClassName("destroy")[0],
@@ -34,10 +35,15 @@ class TodoView extends View {
 		Object.assign(this, views);
 
 		parent.getChildsContainer().appendChild(view);
+
+		// Notify controller
+		this.button.addEventListener("click", () => controller.onDeleteButtonClicked());
 	}
 
 	setupListeners(eventBus) {
-
+		eventBus.addEventHandler('wasDeleted', nothing => {
+			this.parent.getChildsContainer().removeChild(this.html);
+		});
 	}
 }
 
